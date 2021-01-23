@@ -32,9 +32,10 @@ import { zevvle } from 'zevvle-sdk-node'
 
 zev = new zevvle(`${ZEVVLE_KEY}`)
 
-zev.listSimCards().then(result => {
-  console.log(result)
-})
+(async () => {
+  const simCards = await zev.listSimCards()
+  console.log(simCards)
+})()
 ```
 
 ### As a CLI tool
