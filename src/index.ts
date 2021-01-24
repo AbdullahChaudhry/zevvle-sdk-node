@@ -243,6 +243,8 @@ export class zevvle {
 
     const parameters: ParametersModel = {}
 
+    parameters["url"] = url
+
     if (simCardId) {
       parameters["sim_card_id"] = simCardId
     }
