@@ -61,7 +61,7 @@ export class zevvle {
    * Logout and destroy your token.
    */
   logout() {
-    return this._doRequest(`/logout`, {}, { method: 'delete' })
+    return this._doRequest(`/auth`, {}, { method: 'delete' })
   }
 
   /**
