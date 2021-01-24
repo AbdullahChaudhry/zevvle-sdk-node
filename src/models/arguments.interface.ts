@@ -1,4 +1,4 @@
-export interface IArguments {
+export interface ArgumentsModel {
   get_account: string,
   get_user: string,
   get_sim: string,

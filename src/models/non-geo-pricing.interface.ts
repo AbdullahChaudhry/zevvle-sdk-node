@@ -1,4 +1,4 @@
-export interface INonGeoPricing {
+export interface NonGeoPricingModel {
   rate: {
     fixed_fee: number,
     per_min_after_one: number,

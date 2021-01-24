@@ -1,4 +1,4 @@
-export interface ICallRecord {
+export interface CallRecordModel {
   id: string 
   sim_card_id: string,
   setup_at: string,

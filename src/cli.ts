@@ -4,14 +4,14 @@ import dotenv from 'dotenv'
 import { ArgumentParser} from 'argparse'
 
 import { zevvle } from './index'
-import { IArguments, IResult } from './models'
+import { ArgumentsModel, ResultModel } from './models'
 
 dotenv.config()
 let parser: ArgumentParser
 
 async function start() {
   const zevvleKey = <string>process.env.ZEVVLE_KEY
-  const zevvleUrl = <string>process.env.ZEVVLE_URL
+  const zevvleUrl = process.env.ZEVVLE_URL
 
   parser = new ArgumentParser({ description: "A Node interface to the Zevvle API" })
   parser.add_argument('--get-account', { help: 'Get details for a Zevvle account ID.' });
@@ -21,8 +21,8 @@ async function start() {
 
   const zev = new zevvle(zevvleKey, zevvleUrl)
 
-  const args:IArguments = parser.parse_args()
-  let result: IResult = {}
+  const args: ArgumentsModel = parser.parse_args()
+  let result: ResultModel = {}
 
   if (args.get_account) {
     result["account"] = await zev.getAccount(args.get_account)

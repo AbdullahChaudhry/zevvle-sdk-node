@@ -1,4 +1,4 @@
-export interface ISimcard {
+export interface SIMCardModel {
   id: string,
   user_id: string,
   account_id: string,

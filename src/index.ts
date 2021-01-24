@@ -1,24 +1,24 @@
 import axios from 'axios'
 import { throwIfEmpty } from './utils/helpers'
 import { 
-  IAccount, 
-  IHeader, 
-  ISimcard, 
-  ICallRecord, 
-  IParameters, 
-  IUser, 
-  IPricing, 
-  INonGeoPricing, 
-  ICharge, 
-  RecordModel, 
-  WebhookTypes, 
-  IWebhookResponse,
+  AccountModel, 
+  HeaderModel, 
+  SIMCardModel, 
+  CallRecordModel, 
+  ParametersModel, 
+  UserModel, 
+  PricingModel, 
+  NonGeoPricingModel, 
+  ChargeModel, 
+  RecordType, 
+  WebhookType, 
+  WebhookResponseModel,
   API
 } from './models'
 
 export class zevvle {
   _url: string
-  _header: IHeader
+  _header: HeaderModel
 
   /**
    * Initialises the SDK.
@@ -70,7 +70,7 @@ export class zevvle {
    * @param {destination} destination destination country. Defaults to originIso3.
    * @returns Pricing for a country, or between 2 countries
    */
-  async getPricing(originIso3?: string, destinationIso3?: string): Promise<IPricing> {
+  async getPricing(originIso3?: string, destinationIso3?: string): Promise<PricingModel> {
 
     if (!originIso3) {
       return this._doRequest(`/pricing`)
@@ -87,7 +87,7 @@ export class zevvle {
    * Get pricing for Non-Geographic numbers.
    * @param phoneNumber
    */
-  async getNonGeoPricing(phoneNumber: string): Promise<INonGeoPricing> {
+  async getNonGeoPricing(phoneNumber: string): Promise<NonGeoPricingModel> {
     throwIfEmpty(phoneNumber, "Missing phoneNumber parameter")
 
     return this._doRequest(`/non_geographic/${phoneNumber}`)
@@ -98,7 +98,7 @@ export class zevvle {
    * @param accountId ID of the Zevvle account.
    * @returns Zevvle account details.
    */
-  getAccount(accountId: string): Promise<IAccount> {
+  getAccount(accountId: string): Promise<AccountModel> {
     if (!accountId) {
       throw new Error("Missing accountId parameter")
     }
@@ -110,7 +110,7 @@ export class zevvle {
    * Looks up a charge.
    * @returns The details of a charge.
    */
-  async getCharge(chargeId: string): Promise<ICharge> {
+  async getCharge(chargeId: string): Promise<ChargeModel> {
     throwIfEmpty(chargeId, "Missing chargeId parameter")
 
     return this._doRequest(`/charges/${chargeId}`)
@@ -127,8 +127,8 @@ export class zevvle {
     limit: string = "", 
     before: string|null = null , 
     after: string|null = null
-    ): Promise<Array<ICharge>> {
-      const parameters: IParameters = {}
+    ): Promise<Array<ChargeModel>> {
+      const parameters: ParametersModel = {}
   
       if (limit) {
         parameters["limit"] = limit
@@ -150,7 +150,7 @@ export class zevvle {
    * @param userId ID of Zevvle user to look up.
    * @returns Zevvle user details.
    */
-  async getUser(userId: string): Promise<IUser> {
+  async getUser(userId: string): Promise<UserModel> {
     throwIfEmpty(userId, "Missing userId parameter")
 
     return this._doRequest(`/users/${userId}`)
@@ -161,7 +161,7 @@ export class zevvle {
    * @param simId ID of the Zevvle SIM card to look up.
    * @returns Zevvle SIM card details.
    */
-  async getSim(simId: string): Promise<ISimcard> {
+  async getSim(simId: string): Promise<SIMCardModel> {
     throwIfEmpty(simId, "Missing simID parameter")
 
     return this._doRequest(`/sim_cards/${simId}`)
@@ -171,7 +171,7 @@ export class zevvle {
    * List all SIM cards linked to the Zevvle API key.
    * @returns SIM cards for the API key in use.
    */
-  async listSimCards(): Promise<Array<ISimcard>> {
+  async listSimCards(): Promise<Array<SIMCardModel>> {
     return this._doRequest(`/sim_cards`)
   }
 
@@ -180,7 +180,7 @@ export class zevvle {
    * @param callRecordId ID of the Zevvle record to look up.
    * @returns Zevvle call record details.
    */
-  async getCallRecord(callRecordId: string): Promise<ICallRecord> {
+  async getCallRecord(callRecordId: string): Promise<CallRecordModel> {
     throwIfEmpty(callRecordId, "Missing callRecordId parameter")
 
     return this._doRequest(`/call_records/${callRecordId}`)
@@ -197,18 +197,18 @@ export class zevvle {
    */
   async listCallRecords(
     simId: string, 
-    type?: RecordModel, 
+    type?: RecordType, 
     limit: string = "", 
     before: string|null = null , 
     after: string|null = null
-    ): Promise<Array<ICallRecord>> {
+    ): Promise<Array<CallRecordModel>> {
 
-    const parameters: IParameters = {}
+    const parameters: ParametersModel = {}
     throwIfEmpty(simId, "Missing simId parameter")
 
     parameters["sim_card_id"] = simId
     
-    const dataTypes = [RecordModel.DATA, RecordModel.VOICE, RecordModel.SMS, RecordModel.MMS]
+    const dataTypes = [RecordType.DATA, RecordType.VOICE, RecordType.SMS, RecordType.MMS]
 
     if (type && !dataTypes.includes(type)) {
       throw new Error("Invalid call record type (data, voice, sms, mms) only")
@@ -238,10 +238,10 @@ export class zevvle {
    * @param type The matching event type (data.created, voice.created, sms.created, mms.created, charge.created, null)
    * @returns
    */
-  async createWebhook(url: string, simCardId?: string, type?: WebhookTypes): Promise<IWebhookResponse> {
+  async createWebhook(url: string, simCardId?: string, type?: WebhookType): Promise<WebhookResponseModel> {
     throwIfEmpty(url, "Missing url parameter")
 
-    const parameters: IParameters = {}
+    const parameters: ParametersModel = {}
 
     if (simCardId) {
       parameters["sim_card_id"] = simCardId
@@ -259,8 +259,8 @@ export class zevvle {
    * @param simCardId (optional) SIM card to retrieve the webhooks for. Defaults to all your webhooks
    * @returns A list of webhooks
    */
-  async listWebhooks(simCardId?: string): Promise<Array<IWebhookResponse>> {
-    const parameters: IParameters = {}
+  async listWebhooks(simCardId?: string): Promise<Array<WebhookResponseModel>> {
+    const parameters: ParametersModel = {}
 
     if (simCardId) {
       parameters["sim_card_id"] = simCardId

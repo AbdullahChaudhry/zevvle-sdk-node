@@ -1,4 +1,4 @@
-export interface IUser {
+export interface UserModel {
   id: string,
   created_at: string,
   account_id: string,

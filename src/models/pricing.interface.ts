@@ -1,4 +1,4 @@
-export interface IPricing {
+export interface PricingModel {
   voice: number,
   voicemail: number,
   incoming: number,

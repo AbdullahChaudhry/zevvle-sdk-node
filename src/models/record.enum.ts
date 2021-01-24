@@ -1,4 +1,4 @@
-export const enum RecordModel {
+export const enum RecordType {
   DATA = "data",
 
   VOICE = "voice",

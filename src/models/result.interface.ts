@@ -1,8 +1,8 @@
-import { IAccount, IUser, ISimcard } from './' 
+import { AccountModel, UserModel, SIMCardModel } from './' 
 
-export interface IResult {
-  account?: IAccount,
-  user?: IUser,
-  sim?: ISimcard,
-  sim_cards?: ISimcard[]
+export interface ResultModel {
+  account?: AccountModel,
+  user?: UserModel,
+  sim?: SIMCardModel,
+  sim_cards?: SIMCardModel[]
 }
