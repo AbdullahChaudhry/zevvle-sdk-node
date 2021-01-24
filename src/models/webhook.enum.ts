@@ -1,4 +1,4 @@
-export const enum WebhookType {
+export const enum WebhookTypes {
   DATA_CREATED = "data.created",
 
   VOICE_CREATED = "voice.created",

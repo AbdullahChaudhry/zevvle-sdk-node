@@ -10,8 +10,8 @@ import {
   PricingModel, 
   NonGeoPricingModel, 
   ChargeModel, 
-  RecordType, 
-  WebhookType, 
+  RecordTypes, 
+  WebhookTypes, 
   WebhookResponseModel,
   API
 } from './models'
@@ -197,7 +197,7 @@ export class zevvle {
    */
   async listCallRecords(
     simId: string, 
-    type?: RecordType, 
+    type?: RecordTypes, 
     limit: string = "", 
     before: string|null = null , 
     after: string|null = null
@@ -208,9 +208,9 @@ export class zevvle {
 
     parameters["sim_card_id"] = simId
     
-    const dataTypes = [RecordType.DATA, RecordType.VOICE, RecordType.SMS, RecordType.MMS]
+    const recordTypes = [RecordTypes.DATA, RecordTypes.VOICE, RecordTypes.SMS, RecordTypes.MMS]
 
-    if (type && !dataTypes.includes(type)) {
+    if (type && !recordTypes.includes(type)) {
       throw new Error("Invalid call record type (data, voice, sms, mms) only")
     }
 
@@ -238,7 +238,7 @@ export class zevvle {
    * @param type The matching event type (data.created, voice.created, sms.created, mms.created, charge.created, null)
    * @returns
    */
-  async createWebhook(url: string, simCardId?: string, type?: WebhookType): Promise<WebhookResponseModel> {
+  async createWebhook(url: string, simCardId?: string, type?: WebhookTypes): Promise<WebhookResponseModel> {
     throwIfEmpty(url, "Missing url parameter")
 
     const parameters: ParametersModel = {}

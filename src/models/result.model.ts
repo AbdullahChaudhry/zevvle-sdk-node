@@ -1,4 +1,4 @@
-import { AccountModel, UserModel, SIMCardModel } from './' 
+import { AccountModel, UserModel, SIMCardModel } from '.' 
 
 export interface ResultModel {
   account?: AccountModel,

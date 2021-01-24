@@ -1,9 +1,9 @@
-import { WebhookType } from './Webhook.enum'
+import { WebhookTypes } from './Webhook.enum'
 
 export interface WebhookResponseModel {
   id: string,
   url: string,
   user_id: string,
-  type: WebhookType,
+  type: WebhookTypes,
   sim_card_id: null|string
 }

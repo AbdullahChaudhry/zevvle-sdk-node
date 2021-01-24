@@ -1,10 +1,10 @@
-export const enum RecordType {
+export const enum RecordTypes {
   DATA = "data",
-
+  
   VOICE = "voice",
-
+  
   SMS = "sms",
 
-  "MMS" = "mms"
+  MMS = "mms"
 
 }
