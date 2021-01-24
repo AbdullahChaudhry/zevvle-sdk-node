@@ -60,7 +60,7 @@ export class zevvle {
   /**
    * Logout and destroy your token.
    */
-  async logout() {
+  logout() {
     return this._doRequest(`/logout`, {}, { method: 'delete' })
   }
 
@@ -70,7 +70,7 @@ export class zevvle {
    * @param {destination} destination destination country. Defaults to originIso3.
    * @returns Pricing for a country, or between 2 countries
    */
-  async getPricing(originIso3?: string, destinationIso3?: string): Promise<PricingModel> {
+  getPricing(originIso3?: string, destinationIso3?: string): Promise<PricingModel> {
 
     if (!originIso3) {
       return this._doRequest(`/pricing`)
@@ -87,7 +87,7 @@ export class zevvle {
    * Get pricing for Non-Geographic numbers.
    * @param phoneNumber
    */
-  async getNonGeoPricing(phoneNumber: string): Promise<NonGeoPricingModel> {
+  getNonGeoPricing(phoneNumber: string): Promise<NonGeoPricingModel> {
     throwIfEmpty(phoneNumber, "Missing phoneNumber parameter")
 
     return this._doRequest(`/non_geographic/${phoneNumber}`)
@@ -110,7 +110,7 @@ export class zevvle {
    * Looks up a charge.
    * @returns The details of a charge.
    */
-  async getCharge(chargeId: string): Promise<ChargeModel> {
+  getCharge(chargeId: string): Promise<ChargeModel> {
     throwIfEmpty(chargeId, "Missing chargeId parameter")
 
     return this._doRequest(`/charges/${chargeId}`)
@@ -123,7 +123,7 @@ export class zevvle {
    * @param after Limit results of charges after a given datetime.
    * @returns A list of charges for your account.
    */
-  async listCharges(
+  listCharges(
     limit: string = "", 
     before: string|null = null , 
     after: string|null = null
@@ -150,7 +150,7 @@ export class zevvle {
    * @param userId ID of Zevvle user to look up.
    * @returns Zevvle user details.
    */
-  async getUser(userId: string): Promise<UserModel> {
+  getUser(userId: string): Promise<UserModel> {
     throwIfEmpty(userId, "Missing userId parameter")
 
     return this._doRequest(`/users/${userId}`)
@@ -161,7 +161,7 @@ export class zevvle {
    * @param simId ID of the Zevvle SIM card to look up.
    * @returns Zevvle SIM card details.
    */
-  async getSim(simId: string): Promise<SIMCardModel> {
+  getSim(simId: string): Promise<SIMCardModel> {
     throwIfEmpty(simId, "Missing simID parameter")
 
     return this._doRequest(`/sim_cards/${simId}`)
@@ -171,7 +171,7 @@ export class zevvle {
    * List all SIM cards linked to the Zevvle API key.
    * @returns SIM cards for the API key in use.
    */
-  async listSimCards(): Promise<Array<SIMCardModel>> {
+  listSimCards(): Promise<Array<SIMCardModel>> {
     return this._doRequest(`/sim_cards`)
   }
 
@@ -180,7 +180,7 @@ export class zevvle {
    * @param callRecordId ID of the Zevvle record to look up.
    * @returns Zevvle call record details.
    */
-  async getCallRecord(callRecordId: string): Promise<CallRecordModel> {
+  getCallRecord(callRecordId: string): Promise<CallRecordModel> {
     throwIfEmpty(callRecordId, "Missing callRecordId parameter")
 
     return this._doRequest(`/call_records/${callRecordId}`)
@@ -195,7 +195,7 @@ export class zevvle {
    * @param after Limit results ot records after a given datetime.
    * @returns Call records for the given query.
    */
-  async listCallRecords(
+  listCallRecords(
     simId: string, 
     type?: RecordTypes, 
     limit: string = "", 
@@ -238,7 +238,7 @@ export class zevvle {
    * @param type The matching event type (data.created, voice.created, sms.created, mms.created, charge.created, null)
    * @returns
    */
-  async createWebhook(url: string, simCardId?: string, type?: WebhookTypes): Promise<WebhookResponseModel> {
+  createWebhook(url: string, simCardId?: string, type?: WebhookTypes): Promise<WebhookResponseModel> {
     throwIfEmpty(url, "Missing url parameter")
 
     const parameters: ParametersModel = {}
@@ -259,7 +259,7 @@ export class zevvle {
    * @param simCardId (optional) SIM card to retrieve the webhooks for. Defaults to all your webhooks
    * @returns A list of webhooks
    */
-  async listWebhooks(simCardId?: string): Promise<Array<WebhookResponseModel>> {
+  listWebhooks(simCardId?: string): Promise<Array<WebhookResponseModel>> {
     const parameters: ParametersModel = {}
 
     if (simCardId) {
@@ -273,7 +273,7 @@ export class zevvle {
    * @param webhookId Webhook ID
    * @returns void
    */
-  async deleteWebhook(webhookId: string) {
+  deleteWebhook(webhookId: string) {
     throwIfEmpty(webhookId, "Missing webhookId parameter")
 
     return this._doRequest(`/webhooks/${webhookId}`, {}, { method: 'delete'})
