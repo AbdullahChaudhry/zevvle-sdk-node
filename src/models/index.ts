@@ -8,10 +8,8 @@ export * from './pricing.model'
 export * from './non-geo-pricing.model'
 export * from './charge.model'
 export * from './webhook-response.model'
+export * from './response.model'
 
 export * from './api.enum'
 export * from './record.enum'
 export * from './webhook.enum'
-
-export * from './arguments.model'
-export * from './result.model'
