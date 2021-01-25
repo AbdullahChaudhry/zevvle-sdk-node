@@ -1,26 +1,22 @@
 {
   "name": "zevvle-sdk-node",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "The unofficial Node library and SDK for the Zevvle API.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "jest",
-    "start": "dist/cli.js",
     "prepublish": "tsc"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AbdullahChaudhry/zevvle-sdk-node.git"
   },
-  "bin": {
-    "zevvle": "./dist/cli.js"
-  },
   "keywords": [
     "zevvle",
     "sdk",
-    "cli"
+    "node"
   ],
   "author": "Abdullah Chaudhry",
   "license": "ISC",
@@ -29,7 +25,6 @@
   },
   "homepage": "https://github.com/AbdullahChaudhry/zevvle-sdk-node#readme",
   "devDependencies": {
-    "@types/argparse": "^2.0.5",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.22",
     "jest": "^26.6.3",
@@ -38,8 +33,6 @@
     "typescript": "^4.1.3"
   },
   "dependencies": {
-    "argparse": "^2.0.1",
-    "axios": "^0.21.1",
-    "dotenv": "^8.2.0"
+    "axios": "^0.21.1"
   }
 }
