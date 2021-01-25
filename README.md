@@ -41,16 +41,6 @@ import { zevvle } from 'zevvle-sdk-node'
 })()
 ```
 
-### As a CLI tool
-
-1. Create a `.env` file in the repository directory with the folowing:
-
-```
-ZEVVLE_KEY="YOUR_ZEVVLE_SECRET_API_KEY"
-```
-
-2. Run `zevvle -h` to get usage instructions
-
 ## Contributions
 
 Contributions are welcome : )
