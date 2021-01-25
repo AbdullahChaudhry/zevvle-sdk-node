@@ -21,8 +21,6 @@ Npm
 npm install zevvle-sdk-node
 ```
 
-
-
 ## Usage
 
 ### As an import
@@ -30,15 +28,16 @@ npm install zevvle-sdk-node
 ```js
 import { zevvle } from 'zevvle-sdk-node'
 
-(async () => {
+const zev = new zevvle(`${ZEVVLE_KEY}`)
+
+async function listSimCards() => {
   try {
-    const zev = new zevvle(`${ZEVVLE_KEY}`)
     const simCards = await zev.listSimCards()
     console.log(simCards)
   } catch (err) {
     console.error(err)
   }
-})()
+}
 ```
 
 ## Contributions
