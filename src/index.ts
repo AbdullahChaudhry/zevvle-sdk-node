@@ -13,6 +13,7 @@ import {
   RecordTypes, 
   WebhookTypes, 
   WebhookResponseModel,
+  ResponseModel,
   API
 } from './models'
 
@@ -99,9 +100,7 @@ export class zevvle {
    * @returns Zevvle account details.
    */
   getAccount(accountId: string): Promise<AccountModel> {
-    if (!accountId) {
-      throw new Error("Missing accountId parameter")
-    }
+    throwIfEmpty(accountId, "Missing accountId parameter")
 
     return this._doRequest(`/accounts/${accountId}`)
   }
