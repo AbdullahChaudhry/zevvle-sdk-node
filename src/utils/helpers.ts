@@ -3,7 +3,7 @@
  * @param value The value to check.
  * @param errorMessage The error message to display.
  */
-export function throwIfEmpty(value: any, errorMessage: string) {
+export function throwErrorIfEmpty(value: any, errorMessage: string): void {
   if (!value) {
     throw new Error(errorMessage)
   }

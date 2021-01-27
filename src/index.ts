@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { throwIfEmpty } from './utils/helpers'
+import { throwErrorIfEmpty } from './utils/helpers'
 import { 
   AccountModel, 
   HeaderModel, 
@@ -13,7 +13,6 @@ import {
   RecordTypes, 
   WebhookTypes, 
   WebhookResponseModel,
-  ResponseModel,
   API
 } from './models'
 
@@ -27,7 +26,7 @@ export class zevvle {
    * @param url (optional) The Zevvle API URL.
    */
   constructor(key: string, url?: string) {
-    throwIfEmpty(key, "Missing API key.")
+    throwErrorIfEmpty(key, "Missing API key.")
 
     this._url = url || API.URL;
     this._header = { "Authorization": `Bearer ${key}`}
@@ -40,7 +39,7 @@ export class zevvle {
    * @returns Promise
    */
   private async _doRequest(url: string, parameters: any = {}, configOptions?: any): Promise<any> {
-    throwIfEmpty(url, "Called without URL")
+    throwErrorIfEmpty(url, "Called without URL")
 
     const config = {
       headers: this._header,
@@ -89,7 +88,7 @@ export class zevvle {
    * @param phoneNumber
    */
   getNonGeoPricing(phoneNumber: string): Promise<NonGeoPricingModel> {
-    throwIfEmpty(phoneNumber, "Missing phoneNumber parameter")
+    throwErrorIfEmpty(phoneNumber, "Missing phoneNumber parameter")
 
     return this._doRequest(`/non_geographic/${phoneNumber}`)
   }
@@ -100,7 +99,7 @@ export class zevvle {
    * @returns Zevvle account details.
    */
   getAccount(accountId: string): Promise<AccountModel> {
-    throwIfEmpty(accountId, "Missing accountId parameter")
+    throwErrorIfEmpty(accountId, "Missing accountId parameter")
 
     return this._doRequest(`/accounts/${accountId}`)
   }
@@ -110,7 +109,7 @@ export class zevvle {
    * @returns The details of a charge.
    */
   getCharge(chargeId: string): Promise<ChargeModel> {
-    throwIfEmpty(chargeId, "Missing chargeId parameter")
+    throwErrorIfEmpty(chargeId, "Missing chargeId parameter")
 
     return this._doRequest(`/charges/${chargeId}`)
   }
@@ -150,7 +149,7 @@ export class zevvle {
    * @returns Zevvle user details.
    */
   getUser(userId: string): Promise<UserModel> {
-    throwIfEmpty(userId, "Missing userId parameter")
+    throwErrorIfEmpty(userId, "Missing userId parameter")
 
     return this._doRequest(`/users/${userId}`)
   }
@@ -161,7 +160,7 @@ export class zevvle {
    * @returns Zevvle SIM card details.
    */
   getSim(simId: string): Promise<SIMCardModel> {
-    throwIfEmpty(simId, "Missing simID parameter")
+    throwErrorIfEmpty(simId, "Missing simID parameter")
 
     return this._doRequest(`/sim_cards/${simId}`)
   }
@@ -180,7 +179,7 @@ export class zevvle {
    * @returns Zevvle call record details.
    */
   getCallRecord(callRecordId: string): Promise<CallRecordModel> {
-    throwIfEmpty(callRecordId, "Missing callRecordId parameter")
+    throwErrorIfEmpty(callRecordId, "Missing callRecordId parameter")
 
     return this._doRequest(`/call_records/${callRecordId}`)
   }
@@ -203,7 +202,7 @@ export class zevvle {
     ): Promise<Array<CallRecordModel>> {
 
     const parameters: ParametersModel = {}
-    throwIfEmpty(simId, "Missing simId parameter")
+    throwErrorIfEmpty(simId, "Missing simId parameter")
 
     parameters["sim_card_id"] = simId
     
@@ -238,7 +237,7 @@ export class zevvle {
    * @returns
    */
   createWebhook(url: string, simCardId?: string, type?: WebhookTypes): Promise<WebhookResponseModel> {
-    throwIfEmpty(url, "Missing url parameter")
+    throwErrorIfEmpty(url, "Missing url parameter")
 
     const parameters: ParametersModel = {}
 
@@ -275,7 +274,7 @@ export class zevvle {
    * @returns void
    */
   deleteWebhook(webhookId: string) {
-    throwIfEmpty(webhookId, "Missing webhookId parameter")
+    throwErrorIfEmpty(webhookId, "Missing webhookId parameter")
 
     return this._doRequest(`/webhooks/${webhookId}`, {}, { method: 'delete'})
   }  
