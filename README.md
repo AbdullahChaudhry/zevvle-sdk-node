@@ -9,13 +9,13 @@ To get an API key, sign in [here](https://developers.zevvle.com/)
 
 Now [published on npm](https://www.npmjs.com/package/zevvle-sdk-node)!
 
-Yarn
+Yarn:
 
 ```js
 yarn add zevvle-sdk-node
 ```
 
-Npm
+Npm:
 
 ```javascript
 npm install zevvle-sdk-node
@@ -27,7 +27,6 @@ npm install zevvle-sdk-node
 
 ```js
 import { zevvle } from 'zevvle-sdk-node'
-
 const zev = new zevvle(`${ZEVVLE_KEY}`)
 
 async function listSimCards() => {
