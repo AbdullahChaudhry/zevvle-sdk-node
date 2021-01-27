@@ -35,10 +35,10 @@ export class zevvle {
   /**
    * Makes a request.
    * @param url The full URL of the request
-   * @param parameters (optional) Dict of parameters for the request
+   * @param parameters (optional) Key-value pairs of parameters for the request
    * @returns Promise
    */
-  private async _doRequest(url: string, parameters: any = {}, configOptions?: any): Promise<any> {
+  private async _doRequest(url: string, parameters?: ParametersModel, configOptions?: any): Promise<any> {
     throwErrorIfEmpty(url, "Called without URL")
 
     const config = {
