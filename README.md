@@ -2,7 +2,8 @@
 
 The unofficial Node library and SDK for the [Zevvle](https://zevvle.com/) API.
 
-![npm](https://img.shields.io/npm/v/zevvle-sdk-node)
+[![npm](https://img.shields.io/npm/v/zevvle-sdk-node)](https://www.npmjs.com/package/zevvle-sdk-node)
+
 
 ## Prerequisites
 
