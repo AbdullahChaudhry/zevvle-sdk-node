@@ -17,8 +17,8 @@ import {
 } from './models'
 
 export class zevvle {
-  _url: string
-  _header: HeaderModel
+  private _url: string
+  private _header: HeaderModel
 
   /**
    * Initialises the SDK.
