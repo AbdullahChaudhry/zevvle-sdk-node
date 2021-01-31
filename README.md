@@ -45,40 +45,36 @@ async function listSimCards() => {
 }
 ```
 
+## API
+
 ## Table of contents
 
 ### Constructors
 
-- [constructor](README.md#constructor)
-
-### Properties
-
-- [\_header](README.md#_header)
-- [\_url](README.md#_url)
+- [constructor](#constructor)
 
 ### Methods
 
-- [\_doRequest](README.md#_dorequest)
-- [createWebhook](README.md#createwebhook)
-- [deleteWebhook](README.md#deletewebhook)
-- [getAccount](README.md#getaccount)
-- [getCallRecord](README.md#getcallrecord)
-- [getCharge](README.md#getcharge)
-- [getNonGeoPricing](README.md#getnongeopricing)
-- [getPricing](README.md#getpricing)
-- [getSim](README.md#getsim)
-- [getUser](README.md#getuser)
-- [listCallRecords](README.md#listcallrecords)
-- [listCharges](README.md#listcharges)
-- [listSimCards](README.md#listsimcards)
-- [listWebhooks](README.md#listwebhooks)
-- [logout](README.md#logout)
+- [createWebhook](#createwebhook)
+- [deleteWebhook](#deletewebhook)
+- [getAccount](#getaccount)
+- [getCallRecord](#getcallrecord)
+- [getCharge](#getcharge)
+- [getNonGeoPricing](#getnongeopricing)
+- [getPricing](#getpricing)
+- [getSim](#getsim)
+- [getUser](#getuser)
+- [listCallRecords](#listcallrecords)
+- [listCharges](#listcharges)
+- [listSimCards](#listsimcards)
+- [listWebhooks](#listwebhooks)
+- [logout](#logout)
 
 ## Constructors
 
 ### constructor
 
-\+ **new zevvle**(`key`: *string*, `url?`: *string*): [*zevvle*](README.md)
+\+ **new zevvle**(`key`: *string*, `url?`: *string*): [*zevvle*]()
 
 Initialises the SDK.
 
@@ -89,49 +85,11 @@ Name | Type | Description |
 `key` | *string* | Your Zevvle API key.   |
 `url?` | *string* | (optional) The Zevvle API URL.    |
 
-**Returns:** [*zevvle*](README.md)
+**Returns:** [*zevvle*]()
 
 Defined in: [index.ts:21](https://github.com/AbdullahChaudhry/zevvle-sdk-node/blob/b466b2e/src/index.ts#L21)
-
-## Properties
-
-### \_header
-
-• **\_header**: HeaderModel
-
-Defined in: [index.ts:21](https://github.com/AbdullahChaudhry/zevvle-sdk-node/blob/b466b2e/src/index.ts#L21)
-
-___
-
-### \_url
-
-• **\_url**: *string*
-
-Defined in: [index.ts:20](https://github.com/AbdullahChaudhry/zevvle-sdk-node/blob/b466b2e/src/index.ts#L20)
 
 ## Methods
-
-### \_doRequest
-
-▸ `Private`**_doRequest**(`url`: *string*, `parameters?`: ParametersModel, `configOptions?`: *any*): *Promise*<*any*\>
-
-Makes a request.
-
-#### Parameters:
-
-Name | Type | Description |
------- | ------ | ------ |
-`url` | *string* | The full URL of the request   |
-`parameters?` | ParametersModel | (optional) Key-value pairs of parameters for the request   |
-`configOptions?` | *any* | - |
-
-**Returns:** *Promise*<*any*\>
-
-Promise
-
-Defined in: [index.ts:41](https://github.com/AbdullahChaudhry/zevvle-sdk-node/blob/b466b2e/src/index.ts#L41)
-
-___
 
 ### createWebhook
 
@@ -401,7 +359,6 @@ Logout and destroy your token.
 **Returns:** *Promise*<*any*\>
 
 Defined in: [index.ts:63](https://github.com/AbdullahChaudhry/zevvle-sdk-node/blob/b466b2e/src/index.ts#L63)
-
 
 ## Contributions
 
