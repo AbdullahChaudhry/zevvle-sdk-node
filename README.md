@@ -15,8 +15,6 @@ To get an API key, sign in [here](https://developers.zevvle.com/)
 
 ## Installation
 
-Now [published on npm](https://www.npmjs.com/package/zevvle-sdk-node)!
-
 Yarn:
 
 ```js
