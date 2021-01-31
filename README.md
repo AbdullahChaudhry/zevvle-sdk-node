@@ -1,9 +1,16 @@
 # zevvle-sdk-node
+
 The unofficial Node library and SDK for the [Zevvle](https://zevvle.com/) API.
+
+![npm](https://img.shields.io/npm/v/zevvle-sdk-node)
+
+## Prerequisites
 
 You can grab a SIM card from them and get hacking with the docs available [here](https://docs.zevvle.com/).
 
 To get an API key, sign in [here](https://developers.zevvle.com/)
+
+
 
 ## Installation
 
