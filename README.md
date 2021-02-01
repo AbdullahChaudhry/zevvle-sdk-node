@@ -12,7 +12,6 @@ You can grab a SIM card from them and get hacking with the docs available [here]
 To get an API key, sign in [here](https://developers.zevvle.com/)
 
 
-
 ## Installation
 
 Yarn:
@@ -87,8 +86,6 @@ Name | Type | Description |
 
 **Returns:** [*zevvle*]()
 
-Defined in: [index.ts:21](https://github.com/AbdullahChaudhry/zevvle-sdk-node/blob/b466b2e/src/index.ts#L21)
-
 ## Methods
 
 ### createWebhook
@@ -106,8 +103,6 @@ Name | Type | Description |
 `type?` | DATA\_CREATED \| VOICE\_CREATED \| SMS\_CREATED \| MMS\_CREATED \| CHARGE\_CREATED \| NULL | The matching event type (data.created, voice.created, sms.created, mms.created, charge.created, null)   |
 
 **Returns:** *Promise*<WebhookResponseModel\>
-
-Defined in: [index.ts:239](https://github.com/AbdullahChaudhry/zevvle-sdk-node/blob/b466b2e/src/index.ts#L239)
 
 ___
 
@@ -127,8 +122,6 @@ Name | Type | Description |
 
 void
 
-Defined in: [index.ts:276](https://github.com/AbdullahChaudhry/zevvle-sdk-node/blob/b466b2e/src/index.ts#L276)
-
 ___
 
 ### getAccount
@@ -146,8 +139,6 @@ Name | Type | Description |
 **Returns:** *Promise*<AccountModel\>
 
 Zevvle account details.
-
-Defined in: [index.ts:101](https://github.com/AbdullahChaudhry/zevvle-sdk-node/blob/b466b2e/src/index.ts#L101)
 
 ___
 
@@ -167,8 +158,6 @@ Name | Type | Description |
 
 Zevvle call record details.
 
-Defined in: [index.ts:181](https://github.com/AbdullahChaudhry/zevvle-sdk-node/blob/b466b2e/src/index.ts#L181)
-
 ___
 
 ### getCharge
@@ -187,8 +176,6 @@ Name | Type |
 
 The details of a charge.
 
-Defined in: [index.ts:111](https://github.com/AbdullahChaudhry/zevvle-sdk-node/blob/b466b2e/src/index.ts#L111)
-
 ___
 
 ### getNonGeoPricing
@@ -204,8 +191,6 @@ Name | Type | Description |
 `phoneNumber` | *string* |     |
 
 **Returns:** *Promise*<NonGeoPricingModel\>
-
-Defined in: [index.ts:90](https://github.com/AbdullahChaudhry/zevvle-sdk-node/blob/b466b2e/src/index.ts#L90)
 
 ___
 
@@ -226,8 +211,6 @@ Name | Type |
 
 Pricing for a country, or between 2 countries
 
-Defined in: [index.ts:73](https://github.com/AbdullahChaudhry/zevvle-sdk-node/blob/b466b2e/src/index.ts#L73)
-
 ___
 
 ### getSim
@@ -246,8 +229,6 @@ Name | Type | Description |
 
 Zevvle SIM card details.
 
-Defined in: [index.ts:162](https://github.com/AbdullahChaudhry/zevvle-sdk-node/blob/b466b2e/src/index.ts#L162)
-
 ___
 
 ### getUser
@@ -265,8 +246,6 @@ Name | Type | Description |
 **Returns:** *Promise*<UserModel\>
 
 Zevvle user details.
-
-Defined in: [index.ts:151](https://github.com/AbdullahChaudhry/zevvle-sdk-node/blob/b466b2e/src/index.ts#L151)
 
 ___
 
@@ -290,8 +269,6 @@ Name | Type | Default value | Description |
 
 Call records for the given query.
 
-Defined in: [index.ts:196](https://github.com/AbdullahChaudhry/zevvle-sdk-node/blob/b466b2e/src/index.ts#L196)
-
 ___
 
 ### listCharges
@@ -312,8 +289,6 @@ Name | Type | Default value | Description |
 
 A list of charges for your account.
 
-Defined in: [index.ts:124](https://github.com/AbdullahChaudhry/zevvle-sdk-node/blob/b466b2e/src/index.ts#L124)
-
 ___
 
 ### listSimCards
@@ -325,8 +300,6 @@ List all SIM cards linked to the Zevvle API key.
 **Returns:** *Promise*<SIMCardModel[]\>
 
 SIM cards for the API key in use.
-
-Defined in: [index.ts:172](https://github.com/AbdullahChaudhry/zevvle-sdk-node/blob/b466b2e/src/index.ts#L172)
 
 ___
 
@@ -346,8 +319,6 @@ Name | Type | Description |
 
 A list of webhooks
 
-Defined in: [index.ts:262](https://github.com/AbdullahChaudhry/zevvle-sdk-node/blob/b466b2e/src/index.ts#L262)
-
 ___
 
 ### logout
@@ -357,8 +328,6 @@ ___
 Logout and destroy your token.
 
 **Returns:** *Promise*<*any*\>
-
-Defined in: [index.ts:63](https://github.com/AbdullahChaudhry/zevvle-sdk-node/blob/b466b2e/src/index.ts#L63)
 
 ## Contributions
 
