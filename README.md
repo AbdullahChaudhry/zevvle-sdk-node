@@ -79,30 +79,30 @@ Initialises the SDK.
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`key` | *string* | Your Zevvle API key.   |
-`url?` | *string* | (optional) The Zevvle API URL.    |
+Name | Type | Default value | Description |
+------ | ------ | ------ | ------ |
+`key` | *string* | - | Your Zevvle API key.   |
+`url` | *string* | "https://api.zevvle.com" | (optional) The Zevvle API URL.   |
 
-**Returns:** [*zevvle*]()
+**Returns:** Zevvle instance.
 
 ## Methods
 
 ### createWebhook
 
-▸ **createWebhook**(`url`: *string*, `simCardId?`: *string*, `type?`: DATA\_CREATED \| VOICE\_CREATED \| SMS\_CREATED \| MMS\_CREATED \| CHARGE\_CREATED \| NULL): *Promise*<WebhookResponseModel\>
+▸ **createWebhook**(`url`: *string*, `simCardId?`: *string*, `type?`: *null* \| DATA\_CREATED \| VOICE\_CREATED \| SMS\_CREATED \| MMS\_CREATED \| CHARGE\_CREATED): *Promise*<WebhookResponseModel\>
 
 Create a webhook.
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`url` | *string* | The URL to send notifications to. Must be HTTPS.   |
-`simCardId?` | *string* | (optional) ID of SIM card to receive notifications for.   |
-`type?` | DATA\_CREATED \| VOICE\_CREATED \| SMS\_CREATED \| MMS\_CREATED \| CHARGE\_CREATED \| NULL | The matching event type (data.created, voice.created, sms.created, mms.created, charge.created, null)   |
+Name | Type | Default value | Description |
+------ | ------ | ------ | ------ |
+`url` | *string* | - | The URL to send notifications to. Must be HTTPS.   |
+`simCardId?` | *string* | - | (optional) ID of SIM card to receive notifications for. If empty will default to all SIM cards.   |
+`type` | *null* \| DATA\_CREATED \| VOICE\_CREATED \| SMS\_CREATED \| MMS\_CREATED \| CHARGE\_CREATED | null | (optional) The matching event type (data.created, voice.created, sms.created, mms.created, charge.created, null)   |
 
-**Returns:** *Promise*<WebhookResponseModel\>
+**Returns:** Webhook response.
 
 ___
 
@@ -118,9 +118,7 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `webhookId` | *string* | Webhook ID   |
 
-**Returns:** *Promise*<*any*\>
-
-void
+**Returns:** Response message.
 
 ___
 
@@ -136,9 +134,7 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `accountId` | *string* | ID of the Zevvle account.   |
 
-**Returns:** *Promise*<AccountModel\>
-
-Zevvle account details.
+**Returns:** Zevvle account details.
 
 ___
 
@@ -154,9 +150,7 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `callRecordId` | *string* | ID of the Zevvle record to look up.   |
 
-**Returns:** *Promise*<CallRecordModel\>
-
-Zevvle call record details.
+**Returns:** Zevvle call record details.
 
 ___
 
@@ -168,13 +162,11 @@ Looks up a charge.
 
 #### Parameters:
 
-Name | Type |
------- | ------ |
-`chargeId` | *string* |
+Name | Type | Description |
+------ | ------ | ------ |
+`chargeId` | *string* | ID of the charge.   |
 
-**Returns:** *Promise*<ChargeModel\>
-
-The details of a charge.
+**Returns:** The details of a charge.
 
 ___
 
@@ -188,9 +180,9 @@ Get pricing for Non-Geographic numbers.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`phoneNumber` | *string* |     |
+`phoneNumber` | *string* | A non-geographic number.   |
 
-**Returns:** *Promise*<NonGeoPricingModel\>
+**Returns:** Pricing for a non-geographic number.
 
 ___
 
@@ -202,14 +194,12 @@ Get pricing for any country, or between 2 countries.
 
 #### Parameters:
 
-Name | Type |
------- | ------ |
-`originIso3?` | *string* |
-`destinationIso3?` | *string* |
+Name | Type | Description |
+------ | ------ | ------ |
+`originIso3?` | *string* | (optional) Origin country. Defaults to GBR.   |
+`destinationIso3?` | *string* | (optional) Destination country. Defaults to originIso3.   |
 
-**Returns:** *Promise*<PricingModel\>
-
-Pricing for a country, or between 2 countries
+**Returns:** Pricing for a country, or between 2 countries.
 
 ___
 
@@ -225,9 +215,7 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `simId` | *string* | ID of the Zevvle SIM card to look up.   |
 
-**Returns:** *Promise*<SIMCardModel\>
-
-Zevvle SIM card details.
+**Returns:** Zevvle SIM card details.
 
 ___
 
@@ -243,9 +231,7 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `userId` | *string* | ID of Zevvle user to look up.   |
 
-**Returns:** *Promise*<UserModel\>
-
-Zevvle user details.
+**Returns:** Zevvle user details.
 
 ___
 
@@ -262,12 +248,10 @@ Name | Type | Default value | Description |
 `simId` | *string* | - | - |
 `type?` | DATA \| VOICE \| SMS \| MMS | - | (optional) Call record type (data, voice, sms, mms) to filter on.   |
 `limit` | *string* | "" | (optional) How many records to limit the results to.   |
-`before` | *null* \| *string* | null | Limit results to records before a given datetime.   |
-`after` | *null* \| *string* | null | Limit results ot records after a given datetime.   |
+`before` | *null* \| *string* | null | (optional) Limit results to records before a given datetime.   |
+`after` | *null* \| *string* | null | (optional) Limit results ot records after a given datetime.   |
 
-**Returns:** *Promise*<CallRecordModel[]\>
-
-Call records for the given query.
+**Returns:** Call records for the given query.
 
 ___
 
@@ -282,12 +266,10 @@ List all charges linked to the Zevvle API key.
 Name | Type | Default value | Description |
 ------ | ------ | ------ | ------ |
 `limit` | *string* | "" | (optional) How many charges to limit the results to.   |
-`before` | *null* \| *string* | null | Limit results to charges before a given datetime.   |
-`after` | *null* \| *string* | null | Limit results of charges after a given datetime.   |
+`before` | *null* \| *string* | null | (optional) Limit results to charges before a given datetime.   |
+`after` | *null* \| *string* | null | (optional) Limit results of charges after a given datetime.   |
 
-**Returns:** *Promise*<ChargeModel[]\>
-
-A list of charges for your account.
+**Returns:** A list of charges for your account.
 
 ___
 
@@ -297,9 +279,7 @@ ___
 
 List all SIM cards linked to the Zevvle API key.
 
-**Returns:** *Promise*<SIMCardModel[]\>
-
-SIM cards for the API key in use.
+**Returns:** SIM cards for the API key in use.
 
 ___
 
@@ -315,19 +295,18 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `simCardId?` | *string* | (optional) SIM card to retrieve the webhooks for. Defaults to all your webhooks   |
 
-**Returns:** *Promise*<WebhookResponseModel[]\>
-
-A list of webhooks
+**Returns:** A list of webhooks.
 
 ___
 
 ### logout
 
-▸ **logout**(): *Promise*<*any*\>
+▸ **logout**(): *Promise*<ResponseModel\>
 
 Logout and destroy your token.
 
-**Returns:** *Promise*<*any*\>
+**Returns:** Response message.
+
 
 ## Contributions
 
