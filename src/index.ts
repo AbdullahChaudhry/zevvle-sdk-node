@@ -24,6 +24,7 @@ export class zevvle {
    * Initialises the SDK.
    * @param key Your Zevvle API key.
    * @param url (optional) The Zevvle API URL.
+   * @returns zevvle instance.
    */
   constructor(key: string, url: string = "https://api.zevvle.com") {
     throwErrorIfEmpty(key, "Missing API key.")
