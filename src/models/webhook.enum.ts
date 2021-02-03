@@ -7,7 +7,5 @@ export const enum WebhookTypes {
 
   MMS_CREATED = "mms.created",
 
-  CHARGE_CREATED = "charge.created",
-
-  NULL = "null"
+  CHARGE_CREATED = "charge.created"
 }
