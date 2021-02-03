@@ -13,8 +13,7 @@ import {
   RecordTypes, 
   WebhookTypes, 
   WebhookResponseModel,
-  ResponseModel,
-  API
+  ResponseModel
 } from './models'
 
 export class zevvle {
@@ -26,7 +25,7 @@ export class zevvle {
    * @param key Your Zevvle API key.
    * @param url (optional) The Zevvle API URL.
    */
-  constructor(key: string, url: string = API.URL) {
+  constructor(key: string, url: string = "https://api.zevvle.com") {
     throwErrorIfEmpty(key, "Missing API key.")
 
     this._url = url
