@@ -10,6 +10,5 @@ export * from './charge.model'
 export * from './webhook-response.model'
 export * from './response.model'
 
-export * from './api.enum'
 export * from './record.enum'
 export * from './webhook.enum'
