@@ -36,6 +36,7 @@ export class zevvle {
    * Makes a request.
    * @param url The full URL of the request
    * @param parameters (optional) Key-value pairs of parameters for the request
+   * @param configOptions (optional) Configuration options for the request
    * @returns Response data.
    */
   private async _doRequest(url: string, parameters?: ParametersModel, configOptions?: any): Promise<any> {
@@ -67,8 +68,8 @@ export class zevvle {
 
   /**
    * Get pricing for any country, or between 2 countries.
-   * @param originIso3 Origin country. Defaults to GBR.
-   * @param destinationIso3 Destination country. Defaults to originIso3.
+   * @param originIso3 (optional) Origin country. Defaults to GBR.
+   * @param destinationIso3 (optional) Destination country. Defaults to originIso3.
    * @returns Pricing for a country, or between 2 countries.
    */
   getPricing(originIso3?: string, destinationIso3?: string): Promise<PricingModel> {
