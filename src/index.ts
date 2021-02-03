@@ -13,6 +13,7 @@ import {
   RecordTypes, 
   WebhookTypes, 
   WebhookResponseModel,
+  ResponseModel,
   API
 } from './models'
 
@@ -25,10 +26,10 @@ export class zevvle {
    * @param key Your Zevvle API key.
    * @param url (optional) The Zevvle API URL.
    */
-  constructor(key: string, url?: string) {
+  constructor(key: string, url: string = API.URL) {
     throwErrorIfEmpty(key, "Missing API key.")
 
-    this._url = url || API.URL;
+    this._url = url
     this._header = { "Authorization": `Bearer ${key}`}
   }
 
@@ -36,7 +37,7 @@ export class zevvle {
    * Makes a request.
    * @param url The full URL of the request
    * @param parameters (optional) Key-value pairs of parameters for the request
-   * @returns Promise
+   * @returns Response data.
    */
   private async _doRequest(url: string, parameters?: ParametersModel, configOptions?: any): Promise<any> {
     throwErrorIfEmpty(url, "Called without URL")
@@ -59,16 +60,17 @@ export class zevvle {
 
   /**
    * Logout and destroy your token.
+   * @returns Response message.
    */
-  logout() {
+  logout(): Promise<ResponseModel> {
     return this._doRequest(`/auth`, {}, { method: 'delete' })
   }
 
   /**
    * Get pricing for any country, or between 2 countries.
-   * @param {originIso3} origin origin country. Defaults to GBR.
-   * @param {destination} destination destination country. Defaults to originIso3.
-   * @returns Pricing for a country, or between 2 countries
+   * @param originIso3 Origin country. Defaults to GBR.
+   * @param destinationIso3 Destination country. Defaults to originIso3.
+   * @returns Pricing for a country, or between 2 countries.
    */
   getPricing(originIso3?: string, destinationIso3?: string): Promise<PricingModel> {
 
@@ -85,7 +87,8 @@ export class zevvle {
 
   /**
    * Get pricing for Non-Geographic numbers.
-   * @param phoneNumber
+   * @param phoneNumber A non-geographic number.
+   * @returns Pricing for a non-geographic number
    */
   getNonGeoPricing(phoneNumber: string): Promise<NonGeoPricingModel> {
     throwErrorIfEmpty(phoneNumber, "Missing phoneNumber parameter")
@@ -106,6 +109,7 @@ export class zevvle {
 
   /**
    * Looks up a charge.
+   * @param chargeId ID of the charge.
    * @returns The details of a charge.
    */
   getCharge(chargeId: string): Promise<ChargeModel> {
@@ -117,8 +121,8 @@ export class zevvle {
   /**
    * List all charges linked to the Zevvle API key.
    * @param limit (optional) How many charges to limit the results to.
-   * @param before Limit results to charges before a given datetime.
-   * @param after Limit results of charges after a given datetime.
+   * @param before (optional) Limit results to charges before a given datetime.
+   * @param after (optional) Limit results of charges after a given datetime.
    * @returns A list of charges for your account.
    */
   listCharges(
@@ -189,8 +193,8 @@ export class zevvle {
    * @param simID ID of the Zevvle SIM card to get records for.
    * @param type (optional) Call record type (data, voice, sms, mms) to filter on.
    * @param limit (optional) How many records to limit the results to.
-   * @param before Limit results to records before a given datetime.
-   * @param after Limit results ot records after a given datetime.
+   * @param before (optional) Limit results to records before a given datetime.
+   * @param after (optional) Limit results ot records after a given datetime.
    * @returns Call records for the given query.
    */
   listCallRecords(
@@ -232,11 +236,11 @@ export class zevvle {
   /**
    * Create a webhook.
    * @param url The URL to send notifications to. Must be HTTPS.
-   * @param simCardId (optional) ID of SIM card to receive notifications for.
-   * @param type The matching event type (data.created, voice.created, sms.created, mms.created, charge.created, null)
-   * @returns
+   * @param simCardId (optional) ID of SIM card to receive notifications for. If empty will default to all SIM cards.
+   * @param type (optional) The matching event type (data.created, voice.created, sms.created, mms.created, charge.created, null)
+   * @returns A webhook response
    */
-  createWebhook(url: string, simCardId?: string, type?: WebhookTypes): Promise<WebhookResponseModel> {
+  createWebhook(url: string, simCardId?: string, type: WebhookTypes|null = null): Promise<WebhookResponseModel> {
     throwErrorIfEmpty(url, "Missing url parameter")
 
     const parameters: ParametersModel = {}
@@ -271,9 +275,9 @@ export class zevvle {
   /**
    * Delete a webhook
    * @param webhookId Webhook ID
-   * @returns void
+   * @returns Response message
    */
-  deleteWebhook(webhookId: string) {
+  deleteWebhook(webhookId: string): Promise<any> {
     throwErrorIfEmpty(webhookId, "Missing webhookId parameter")
 
     return this._doRequest(`/webhooks/${webhookId}`, {}, { method: 'delete'})
