@@ -121,13 +121,13 @@ export class zevvle {
 
   /**
    * List all charges linked to the Zevvle API key.
-   * @param limit (optional) How many charges to limit the results to.
-   * @param before (optional) Limit results to charges before a given datetime.
-   * @param after (optional) Limit results to charges after a given datetime.
+   * @param limit (optional) Limit the number of records; default 10, maximum 100.
+   * @param before (optional) Get records before an RFC 3339-encoded timestamp or record id.
+   * @param after (optional) Get records after an RFC 3339-encoded timestamp or record id.
    * @returns A list of charges for your account.
    */
   listCharges(
-    limit: string = "", 
+    limit: string = "10", 
     before: string|null = null , 
     after: string|null = null
     ): Promise<Array<ChargeModel>> {
@@ -193,16 +193,16 @@ export class zevvle {
    * List call records for a given Zevvle SIM ID, according to filtering.
    * @param simID ID of the Zevvle SIM card to get records for.
    * @param type (optional) Call record type (data, voice, sms, mms) to filter on.
-   * @param limit (optional) How many records to limit the results to.
-   * @param before (optional) Limit results to records before a given datetime.
-   * @param after (optional) Limit results to records after a given datetime.
+   * @param limit (optional) Limit the number of records; default 10, maximum 100.
+   * @param before (optional) Get records before an RFC 3339-encoded timestamp or record id.
+   * @param after (optional) Get records after an RFC 3339-encoded timestamp or record id.
    * @returns Call records for the given query.
    */
   listCallRecords(
     simId: string, 
     type?: RecordTypes, 
-    limit: string = "", 
-    before: string|null = null , 
+    limit: string = "10", 
+    before: string|null = null, 
     after: string|null = null
     ): Promise<Array<CallRecordModel>> {
 

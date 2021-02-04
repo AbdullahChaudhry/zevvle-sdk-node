@@ -173,9 +173,9 @@ List all charges linked to the Zevvle API key.
 
 Name | Type | Default value | Description |
 ------ | ------ | ------ | ------ |
-`limit` | *string* | "" | (optional) How many charges to limit the results to.   |
-`before` | *null* \| *string* | null | (optional) Limit results to charges before a given datetime.   |
-`after` | *null* \| *string* | null | (optional) Limit results to charges after a given datetime.   |
+`limit` | *string* | 10 | (optional) Limit the number of records; default 10, maximum 100.   |
+`before` | *null* \| *string* | null | (optional) Get records before an RFC 3339-encoded timestamp or record id.   |
+`after` | *null* \| *string* | null | (optional) Get records after an RFC 3339-encoded timestamp or record id.   |
 
 **Returns:** A list of charges for your account.
 
@@ -251,9 +251,9 @@ Name | Type | Default value | Description |
 ------ | ------ | ------ | ------ |
 `simId` | *string* | - | ID of the Zevvle SIM card to get records for.
 `type?` | DATA \| VOICE \| SMS \| MMS | - | (optional) Call record type (data, voice, sms, mms) to filter on.   |
-`limit` | *string* | "" | (optional) How many records to limit the results to.   |
-`before` | *null* \| *string* | null | (optional) Limit results to records before a given datetime.   |
-`after` | *null* \| *string* | null | (optional) Limit results ot records after a given datetime.   |
+`limit` | *string* | 10 | (optional) Limit the number of records; default 10, maximum 100.   |
+`before` | *null* \| *string* | null | (optional) Get records before an RFC 3339-encoded timestamp or record id.   |
+`after` | *null* \| *string* | null | (optional) Get records after an RFC 3339-encoded timestamp or record id.   |
 
 **Returns:** Call records for the given query.
 
