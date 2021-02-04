@@ -24,7 +24,7 @@ export class zevvle {
    * Initialises the SDK.
    * @param key Your Zevvle API key.
    * @param url (optional) The Zevvle API URL.
-   * @returns zevvle instance.
+   * @returns Zevvle instance.
    */
   constructor(key: string, url: string = "https://api.zevvle.com") {
     throwErrorIfEmpty(key, "Missing API key.")
@@ -35,9 +35,9 @@ export class zevvle {
 
   /**
    * Makes a request.
-   * @param url The full URL of the request
-   * @param parameters (optional) Key-value pairs of parameters for the request
-   * @param configOptions (optional) Configuration options for the request
+   * @param url The full URL of the request.
+   * @param parameters (optional) Key-value pairs of parameters for the request.
+   * @param configOptions (optional) Configuration options for the request.
    * @returns Response data.
    */
   private async _doRequest(url: string, parameters?: ParametersModel, configOptions?: any): Promise<any> {
@@ -89,7 +89,7 @@ export class zevvle {
   /**
    * Get pricing for Non-Geographic numbers.
    * @param phoneNumber A non-geographic number.
-   * @returns Pricing for a non-geographic number
+   * @returns Pricing for a non-geographic number.
    */
   getNonGeoPricing(phoneNumber: string): Promise<NonGeoPricingModel> {
     throwErrorIfEmpty(phoneNumber, "Missing phoneNumber parameter")
@@ -239,7 +239,7 @@ export class zevvle {
    * @param url The URL to send notifications to. Must be HTTPS.
    * @param simCardId (optional) ID of SIM card to receive notifications for. If empty will default to all SIM cards.
    * @param type (optional) The matching event type (data.created, voice.created, sms.created, mms.created, charge.created, null)
-   * @returns A webhook response
+   * @returns A webhook response.
    */
   createWebhook(url: string, simCardId?: string, type: WebhookTypes|null = null): Promise<WebhookResponseModel> {
     throwErrorIfEmpty(url, "Missing url parameter")
@@ -261,8 +261,8 @@ export class zevvle {
 
   /**
    * List webhooks.
-   * @param simCardId (optional) SIM card to retrieve the webhooks for. Defaults to all your webhooks
-   * @returns A list of webhooks
+   * @param simCardId (optional) SIM card to retrieve the webhooks for. Defaults to all your webhooks.
+   * @returns A list of webhooks.
    */
   listWebhooks(simCardId?: string): Promise<Array<WebhookResponseModel>> {
     const parameters: ParametersModel = {}
@@ -275,8 +275,8 @@ export class zevvle {
 
   /**
    * Delete a webhook
-   * @param webhookId Webhook ID
-   * @returns Response message
+   * @param webhookId Webhook ID.
+   * @returns Response message.
    */
   deleteWebhook(webhookId: string): Promise<any> {
     throwErrorIfEmpty(webhookId, "Missing webhookId parameter")
