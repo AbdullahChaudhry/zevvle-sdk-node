@@ -16,7 +16,7 @@ import {
   ResponseModel
 } from './models'
 
-export class zevvle {
+export class Zevvle {
   private _url: string
   private _header: HeaderModel
 
