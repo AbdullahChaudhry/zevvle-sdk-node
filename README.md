@@ -82,7 +82,7 @@ Initialises the SDK.
 Name | Type | Default value | Description |
 ------ | ------ | ------ | ------ |
 `key` | *string* | - | Your Zevvle API key.   |
-`url` | *string* | "https://api.zevvle.com" | (optional) The Zevvle API URL.   |
+`url` | *string* | https<nolink>://api.zevvle.com | (optional) The Zevvle API URL.   |
 
 **Returns:** Zevvle instance.
 
