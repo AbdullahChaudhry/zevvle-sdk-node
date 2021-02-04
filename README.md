@@ -73,7 +73,7 @@ async function listSimCards() => {
 
 ### constructor
 
-\+ **new zevvle**(`key`: *string*, `url?`: *string*): [*zevvle*]()
+\+ **new zevvle**(`key`: *string*, `url?`: *string*): zevvle
 
 Initialises the SDK.
 
