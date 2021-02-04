@@ -31,8 +31,8 @@ npm install zevvle-sdk-node
 ### As an import
 
 ```js
-import { zevvle } from 'zevvle-sdk-node'
-const zev = new zevvle(`${ZEVVLE_KEY}`)
+import { Zevvle } from 'zevvle-sdk-node'
+const zev = new Zevvle(`${ZEVVLE_KEY}`)
 
 async function listSimCards() => {
   try {
@@ -73,7 +73,7 @@ async function listSimCards() => {
 
 ### constructor
 
-\+ **new zevvle**(`key`: *string*, `url?`: *string*): zevvle
+\+ **new Zevvle**(`key`: *string*, `url?`: *string*): Zevvle
 
 Initialises the SDK.
 
