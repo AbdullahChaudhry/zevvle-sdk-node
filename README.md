@@ -175,7 +175,7 @@ Name | Type | Default value | Description |
 ------ | ------ | ------ | ------ |
 `limit` | *string* | "" | (optional) How many charges to limit the results to.   |
 `before` | *null* \| *string* | null | (optional) Limit results to charges before a given datetime.   |
-`after` | *null* \| *string* | null | (optional) Limit results of charges after a given datetime.   |
+`after` | *null* \| *string* | null | (optional) Limit results to charges after a given datetime.   |
 
 **Returns:** A list of charges for your account.
 

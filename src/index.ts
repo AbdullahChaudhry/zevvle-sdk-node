@@ -123,7 +123,7 @@ export class zevvle {
    * List all charges linked to the Zevvle API key.
    * @param limit (optional) How many charges to limit the results to.
    * @param before (optional) Limit results to charges before a given datetime.
-   * @param after (optional) Limit results of charges after a given datetime.
+   * @param after (optional) Limit results to charges after a given datetime.
    * @returns A list of charges for your account.
    */
   listCharges(
