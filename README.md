@@ -54,20 +54,20 @@ async function listSimCards() => {
 
 ### Methods
 
-- [createWebhook](#createwebhook)
-- [deleteWebhook](#deletewebhook)
-- [getAccount](#getaccount)
-- [getCallRecord](#getcallrecord)
-- [getCharge](#getcharge)
-- [getNonGeoPricing](#getnongeopricing)
-- [getPricing](#getpricing)
-- [getSim](#getsim)
-- [getUser](#getuser)
-- [listCallRecords](#listcallrecords)
-- [listCharges](#listcharges)
-- [listSimCards](#listsimcards)
-- [listWebhooks](#listwebhooks)
 - [logout](#logout)
+- [getPricing](#getpricing)
+- [getNonGeoPricing](#getnongeopricing)
+- [getAccount](#getaccount)
+- [getCharge](#getcharge)
+- [listCharges](#listcharges)
+- [getUser](#getuser)
+- [getSim](#getsim)
+- [listSimCards](#listsimcards)
+- [getCallRecord](#getcallrecord)
+- [listCallRecords](#listcallrecords)
+- [createWebhook](#createwebhook)
+- [listWebhooks](#listwebhooks)
+- [deleteWebhook](#deletewebhook)
 
 ## Constructors
 
@@ -88,101 +88,13 @@ Name | Type | Default value | Description |
 
 ## Methods
 
-### createWebhook
+### logout
 
-▸ **createWebhook**(`url`: *string*, `simCardId?`: *string*, `type?`: *null* \| DATA\_CREATED \| VOICE\_CREATED \| SMS\_CREATED \| MMS\_CREATED \| CHARGE\_CREATED): *Promise*<WebhookResponseModel\>
+▸ **logout**(): *Promise*<ResponseModel\>
 
-Create a webhook.
-
-#### Parameters:
-
-Name | Type | Default value | Description |
------- | ------ | ------ | ------ |
-`url` | *string* | - | The URL to send notifications to. Must be HTTPS.   |
-`simCardId?` | *string* | - | (optional) ID of SIM card to receive notifications for. If empty will default to all SIM cards.   |
-`type` | *null* \| DATA\_CREATED \| VOICE\_CREATED \| SMS\_CREATED \| MMS\_CREATED \| CHARGE\_CREATED | null | (optional) The matching event type (data.created, voice.created, sms.created, mms.created, charge.created, null)   |
-
-**Returns:** Webhook response.
-
-___
-
-### deleteWebhook
-
-▸ **deleteWebhook**(`webhookId`: *string*): *Promise*<*any*\>
-
-Delete a webhook
-
-#### Parameters:
-
-Name | Type | Description |
------- | ------ | ------ |
-`webhookId` | *string* | Webhook ID   |
+Logout and destroy your token.
 
 **Returns:** Response message.
-
-___
-
-### getAccount
-
-▸ **getAccount**(`accountId`: *string*): *Promise*<AccountModel\>
-
-Looks up Zevvle account.
-
-#### Parameters:
-
-Name | Type | Description |
------- | ------ | ------ |
-`accountId` | *string* | ID of the Zevvle account.   |
-
-**Returns:** Zevvle account details.
-
-___
-
-### getCallRecord
-
-▸ **getCallRecord**(`callRecordId`: *string*): *Promise*<CallRecordModel\>
-
-Looks up Zevvle call record.
-
-#### Parameters:
-
-Name | Type | Description |
------- | ------ | ------ |
-`callRecordId` | *string* | ID of the Zevvle record to look up.   |
-
-**Returns:** Zevvle call record details.
-
-___
-
-### getCharge
-
-▸ **getCharge**(`chargeId`: *string*): *Promise*<ChargeModel\>
-
-Looks up a charge.
-
-#### Parameters:
-
-Name | Type | Description |
------- | ------ | ------ |
-`chargeId` | *string* | ID of the charge.   |
-
-**Returns:** The details of a charge.
-
-___
-
-### getNonGeoPricing
-
-▸ **getNonGeoPricing**(`phoneNumber`: *string*): *Promise*<NonGeoPricingModel\>
-
-Get pricing for Non-Geographic numbers.
-
-#### Parameters:
-
-Name | Type | Description |
------- | ------ | ------ |
-`phoneNumber` | *string* | A non-geographic number.   |
-
-**Returns:** Pricing for a non-geographic number.
 
 ___
 
@@ -203,19 +115,69 @@ Name | Type | Description |
 
 ___
 
-### getSim
+### getNonGeoPricing
 
-▸ **getSim**(`simId`: *string*): *Promise*<SIMCardModel\>
+▸ **getNonGeoPricing**(`phoneNumber`: *string*): *Promise*<NonGeoPricingModel\>
 
-Looks up a Zevvle SIM card.
+Get pricing for Non-Geographic numbers.
 
 #### Parameters:
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`simId` | *string* | ID of the Zevvle SIM card to look up.   |
+`phoneNumber` | *string* | A non-geographic number.   |
 
-**Returns:** Zevvle SIM card details.
+**Returns:** Pricing for a non-geographic number.
+
+___
+
+### getAccount
+
+▸ **getAccount**(`accountId`: *string*): *Promise*<AccountModel\>
+
+Looks up Zevvle account.
+
+#### Parameters:
+
+Name | Type | Description |
+------ | ------ | ------ |
+`accountId` | *string* | ID of the Zevvle account.   |
+
+**Returns:** Zevvle account details.
+
+___
+
+### getCharge
+
+▸ **getCharge**(`chargeId`: *string*): *Promise*<ChargeModel\>
+
+Looks up a charge.
+
+#### Parameters:
+
+Name | Type | Description |
+------ | ------ | ------ |
+`chargeId` | *string* | ID of the charge.   |
+
+**Returns:** The details of a charge.
+
+___
+
+### listCharges
+
+▸ **listCharges**(`limit?`: *string*, `before?`: *null* \| *string*, `after?`: *null* \| *string*): *Promise*<ChargeModel[]\>
+
+List all charges linked to the Zevvle API key.
+
+#### Parameters:
+
+Name | Type | Default value | Description |
+------ | ------ | ------ | ------ |
+`limit` | *string* | "" | (optional) How many charges to limit the results to.   |
+`before` | *null* \| *string* | null | (optional) Limit results to charges before a given datetime.   |
+`after` | *null* \| *string* | null | (optional) Limit results of charges after a given datetime.   |
+
+**Returns:** A list of charges for your account.
 
 ___
 
@@ -232,6 +194,48 @@ Name | Type | Description |
 `userId` | *string* | ID of Zevvle user to look up.   |
 
 **Returns:** Zevvle user details.
+
+___
+
+### getSim
+
+▸ **getSim**(`simId`: *string*): *Promise*<SIMCardModel\>
+
+Looks up a Zevvle SIM card.
+
+#### Parameters:
+
+Name | Type | Description |
+------ | ------ | ------ |
+`simId` | *string* | ID of the Zevvle SIM card to look up.   |
+
+**Returns:** Zevvle SIM card details.
+
+___
+
+### listSimCards
+
+▸ **listSimCards**(): *Promise*<SIMCardModel[]\>
+
+List all SIM cards linked to the Zevvle API key.
+
+**Returns:** SIM cards for the API key in use.
+
+___
+
+### getCallRecord
+
+▸ **getCallRecord**(`callRecordId`: *string*): *Promise*<CallRecordModel\>
+
+Looks up Zevvle call record.
+
+#### Parameters:
+
+Name | Type | Description |
+------ | ------ | ------ |
+`callRecordId` | *string* | ID of the Zevvle record to look up.   |
+
+**Returns:** Zevvle call record details.
 
 ___
 
@@ -255,31 +259,21 @@ Name | Type | Default value | Description |
 
 ___
 
-### listCharges
+### createWebhook
 
-▸ **listCharges**(`limit?`: *string*, `before?`: *null* \| *string*, `after?`: *null* \| *string*): *Promise*<ChargeModel[]\>
+▸ **createWebhook**(`url`: *string*, `simCardId?`: *string*, `type?`: *null* \| DATA\_CREATED \| VOICE\_CREATED \| SMS\_CREATED \| MMS\_CREATED \| CHARGE\_CREATED): *Promise*<WebhookResponseModel\>
 
-List all charges linked to the Zevvle API key.
+Create a webhook.
 
 #### Parameters:
 
 Name | Type | Default value | Description |
 ------ | ------ | ------ | ------ |
-`limit` | *string* | "" | (optional) How many charges to limit the results to.   |
-`before` | *null* \| *string* | null | (optional) Limit results to charges before a given datetime.   |
-`after` | *null* \| *string* | null | (optional) Limit results of charges after a given datetime.   |
+`url` | *string* | - | The URL to send notifications to. Must be HTTPS.   |
+`simCardId?` | *string* | - | (optional) ID of SIM card to receive notifications for. If empty will default to all SIM cards.   |
+`type` | *null* \| DATA\_CREATED \| VOICE\_CREATED \| SMS\_CREATED \| MMS\_CREATED \| CHARGE\_CREATED | null | (optional) The matching event type (data.created, voice.created, sms.created, mms.created, charge.created, null)   |
 
-**Returns:** A list of charges for your account.
-
-___
-
-### listSimCards
-
-▸ **listSimCards**(): *Promise*<SIMCardModel[]\>
-
-List all SIM cards linked to the Zevvle API key.
-
-**Returns:** SIM cards for the API key in use.
+**Returns:** Webhook response.
 
 ___
 
@@ -299,14 +293,19 @@ Name | Type | Description |
 
 ___
 
-### logout
+### deleteWebhook
 
-▸ **logout**(): *Promise*<ResponseModel\>
+▸ **deleteWebhook**(`webhookId`: *string*): *Promise*<*any*\>
 
-Logout and destroy your token.
+Delete a webhook
+
+#### Parameters:
+
+Name | Type | Description |
+------ | ------ | ------ |
+`webhookId` | *string* | Webhook ID   |
 
 **Returns:** Response message.
-
 
 ## Contributions
 
