@@ -195,7 +195,7 @@ export class zevvle {
    * @param type (optional) Call record type (data, voice, sms, mms) to filter on.
    * @param limit (optional) How many records to limit the results to.
    * @param before (optional) Limit results to records before a given datetime.
-   * @param after (optional) Limit results ot records after a given datetime.
+   * @param after (optional) Limit results to records after a given datetime.
    * @returns Call records for the given query.
    */
   listCallRecords(
