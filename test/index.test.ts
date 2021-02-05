@@ -16,7 +16,8 @@ import {
   callRecordsResponse,
   callRecordResponse,
   webhookResponse,
-  webhookListResponse
+  webhookListResponse,
+  deleteWebhookResponse
 } from './responses'
 
 const apiKey: string = "key_XXXXXXXXXXXXXXXXXXXXXXXX"
@@ -175,6 +176,8 @@ describe('Webhooks', () => {
       .reply(200, webhookResponse)
       .get(`/webhooks?sim_card_id=${firstSIMCardId}`)
       .reply(200, webhookListResponse)
+      .delete(`/webhooks/wh_XXXXXXXXXXXXXXXXXXXXXXXX`)
+      .reply(200, deleteWebhookResponse)
       
   })
 
@@ -188,5 +191,11 @@ describe('Webhooks', () => {
     let response = await zev.listWebhooks(firstSIMCardId)
 
     expect(response).to.deep.equal(webhookListResponse)
+  })
+
+  it('should delete a webhook', async () => {
+    let response = await zev.deleteWebhook("wh_XXXXXXXXXXXXXXXXXXXXXXXX")
+
+    expect(response).to.deep.equal(deleteWebhookResponse)
   })
 })

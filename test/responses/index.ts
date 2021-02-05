@@ -18,3 +18,4 @@ export * from './callRecord.response'
 
 export * from './webhook.response'
 export * from './webhookList.response'
+export * from './deleteWebhook.response'
