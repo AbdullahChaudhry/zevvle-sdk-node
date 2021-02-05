@@ -200,7 +200,7 @@ export class Zevvle {
    */
   listCallRecords(
     simId: string, 
-    type?: RecordTypes, 
+    type?: string, 
     limit?: string, 
     before?: string,
     after?: string
@@ -213,7 +213,7 @@ export class Zevvle {
     
     const recordTypes = [RecordTypes.DATA, RecordTypes.VOICE, RecordTypes.SMS, RecordTypes.MMS]
 
-    if (type && !recordTypes.includes(type)) {
+    if (type && !recordTypes.includes((type as RecordTypes))) {
       throw new Error("Invalid call record type (data, voice, sms, mms) only")
     }
 
