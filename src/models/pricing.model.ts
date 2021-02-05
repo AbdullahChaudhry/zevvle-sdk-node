@@ -1,7 +1,7 @@
 export interface PricingModel {
   voice: number,
-  voicemail: number,
-  incoming: number,
+  voicemail?: number,
+  incoming?: number,
   sms: number,
   mms: number,
   megabyte?: number,
