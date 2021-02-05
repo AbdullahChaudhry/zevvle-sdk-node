@@ -231,7 +231,7 @@ export class Zevvle {
       parameters["after"] = after
     }
 
-    return this._doRequest("/call_records/", parameters)
+    return this._doRequest("/call_records", parameters)
   }
 
   /**
