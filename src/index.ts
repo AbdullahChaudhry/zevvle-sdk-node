@@ -127,9 +127,9 @@ export class Zevvle {
    * @returns A list of charges for your account.
    */
   listCharges(
-    limit: string = "10", 
-    before: string|null = null , 
-    after: string|null = null
+    limit?: string, 
+    before?: string,
+    after?: string
     ): Promise<Array<ChargeModel>> {
       const parameters: ParametersModel = {}
   
@@ -201,9 +201,9 @@ export class Zevvle {
   listCallRecords(
     simId: string, 
     type?: RecordTypes, 
-    limit: string = "10", 
-    before: string|null = null, 
-    after: string|null = null
+    limit?: string, 
+    before?: string,
+    after?: string
     ): Promise<Array<CallRecordModel>> {
 
     const parameters: ParametersModel = {}
