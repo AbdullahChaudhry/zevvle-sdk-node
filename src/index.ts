@@ -241,7 +241,7 @@ export class Zevvle {
    * @param type (optional) The matching event type (data.created, voice.created, sms.created, mms.created, charge.created, null)
    * @returns A webhook response.
    */
-  createWebhook(url: string, simCardId?: string, type: WebhookTypes|null = null): Promise<WebhookResponseModel> {
+  createWebhook(url: string, simCardId?: string, type: string|null = null): Promise<WebhookResponseModel> {
     throwErrorIfEmpty(url, "Missing url parameter")
 
     const parameters: ParametersModel = {}
