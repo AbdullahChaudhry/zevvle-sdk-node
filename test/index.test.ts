@@ -89,12 +89,45 @@ describe('Accounts', () => {
 })
 
 describe('Charges', () => {
+  let beforeTimestamp: string = `2021-02-02T12:00:00.000Z`
+  let afterTimestamp: string = `2021-01-01T12:00:00.000Z`
+  let limit: string = `1`
+  let chargeId: string = `ch_1XXXXXXXXXXXXXXXXXXXXXXX`
+
   beforeEach(() => {
     nock(url)
       .get(`/charges`)
       .reply(200, chargesResponse)
-      .get(`/charges/ch_1XXXXXXXXXXXXXXXXXXXXXXX`)
+
+      .get(`/charges/${chargeId}`)
       .reply(200, chargeResponse)
+
+      .get(`/charges?limit=${limit}`)
+      .reply(200, chargeResponse)
+
+      .get(`/charges?before=${beforeTimestamp}`)
+      .reply(200, chargesResponse)
+
+      .get(`/charges?limit=${limit}&before=${beforeTimestamp}`)
+      .reply(200, chargeResponse)
+
+      .get(`/charges?after=${afterTimestamp}`)
+      .reply(200, chargesResponse)
+
+      .get(`/charges?limit=${limit}&after=${afterTimestamp}`)
+      .reply(200, chargeResponse)
+
+      .get(`/charges?before=${beforeTimestamp}&after=${afterTimestamp}`)
+      .reply(200, chargesResponse)
+
+      .get(`/charges?limit=${limit}&before=${beforeTimestamp}&after=${afterTimestamp}`)
+      .reply(200, chargeResponse)
+  })
+
+  it('should return the details of a charge', async () => {
+    let response = await zev.getCharge(chargeId)
+
+    expect(response).to.deep.equal(chargeResponse)
   })
 
   it('should return a list of charges', async () => {
@@ -103,8 +136,45 @@ describe('Charges', () => {
     expect(response).to.deep.equal(chargesResponse)
   })
 
-  it('should return the details of a charge', async () => {
-    let response = await zev.getCharge('ch_1XXXXXXXXXXXXXXXXXXXXXXX')
+  it('should return a list of charges with a limit', async () => {
+    let response = await zev.listCharges(limit)
+
+    expect(response).to.deep.equal(chargeResponse)
+  })
+
+  it('should return a list of charges before a timestamp', async () => {
+    let response = await zev.listCharges(null, beforeTimestamp)
+
+    expect(response).to.deep.equal(chargesResponse)
+  })
+
+  it('should return a list of charges before a timestamp with limit', async () => {
+    let limit = "1"
+    let response = await zev.listCharges(limit, beforeTimestamp)
+
+    expect(response).to.deep.equal(chargeResponse)
+  })
+
+  it('should return a list of charges after a timestamp', async () => {
+    let response = await zev.listCharges(null, null, afterTimestamp)
+
+    expect(response).to.deep.equal(chargesResponse)
+  })
+
+  it('should return a list of charges after a timestamp with limit', async () => {
+    let response = await zev.listCharges(limit, null, afterTimestamp)
+
+    expect(response).to.deep.equal(chargeResponse)
+  })
+
+  it('should return a list of charges before a timestamp AND after a timestamp', async () => {
+    let response = await zev.listCharges(null, beforeTimestamp, afterTimestamp)
+
+    expect(response).to.deep.equal(chargesResponse)
+  })
+
+  it('should return a list of charges before a timestamp AND after a timestamp with limit', async () => {
+    let response = await zev.listCharges(limit, beforeTimestamp, afterTimestamp)
 
     expect(response).to.deep.equal(chargeResponse)
   })
@@ -155,18 +225,61 @@ describe('Call Records', () => {
       .reply(200, callRecordResponse)
   })
 
-  it('should return a list of call records for a SIM card', async () => {
-    let response = await zev.listCallRecords(firstSIMCardId)
-
-    expect(response).to.deep.equal(callRecordsResponse)
-  })
-
   it('should return the details of a call record', async () => {
     let response = await zev.getCallRecord("voice_XXXXXXXXXXXXXXXXXXXXXXXX")
 
     expect(response).to.deep.equal(callRecordResponse)
   })
 
+  it('should return a list of call records for a SIM card', async () => {
+    let response = await zev.listCallRecords(firstSIMCardId)
+
+    expect(response).to.deep.equal(callRecordsResponse)
+  })
+
+  /* pagination */
+
+  it('should return a list of call records for a SIM card with a limit', async () => {
+    let response = await zev.listCallRecords(firstSIMCardId)
+
+    expect(response).to.deep.equal(callRecordsResponse)
+  })
+
+  // it('should return a list of call records for a SIM card before a timestamp', async () => {
+  //   let response = await zev.listCallRecords(firstSIMCardId)
+
+  //   expect(response).to.deep.equal(callRecordsResponse)
+  // })
+
+  // it('should return a list of call records for a SIM card before a timestamp with limit', async () => {
+  //   let response = await zev.listCallRecords(firstSIMCardId)
+
+  //   expect(response).to.deep.equal(callRecordsResponse)
+  // })
+
+  // it('should return a list of call records for a SIM card after a timestamp', async () => {
+  //   let response = await zev.listCallRecords(firstSIMCardId)
+
+  //   expect(response).to.deep.equal(callRecordsResponse)
+  // })
+
+  // it('should return a list of call records for a SIM card after a timestamp with limit', async () => {
+  //   let response = await zev.listCallRecords(firstSIMCardId)
+
+  //   expect(response).to.deep.equal(callRecordsResponse)
+  // })
+
+  // it('should return a list of call records for a SIM card before a timestamp AND after a timestamp', async () => {
+  //   let response = await zev.listCallRecords(firstSIMCardId)
+
+  //   expect(response).to.deep.equal(callRecordsResponse)
+  // })
+
+  // it('should return a list of call records for a SIM card before a timestamp AND after a timestamp with limit', async () => {
+  //   let response = await zev.listCallRecords(firstSIMCardId)
+
+  //   expect(response).to.deep.equal(callRecordsResponse)
+  // })
 })
 
 describe('Webhooks', () => {
