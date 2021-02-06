@@ -217,16 +217,43 @@ describe('SIM Cards', () => {
 })
 
 describe('Call Records', () => {
+  let beforeTimestamp: string = `2021-02-06T12:00:00.000Z`
+  let afterTimestamp: string = `2021-01-01T12:00:00.000Z`
+  let limit: string = `1`
+  let recordId: string = `voice_XXXXXXXXXXXXXXXXXXXXXXXX`
+
   beforeEach(() => {
     nock(url)
       .get(`/call_records?sim_card_id=${firstSIMCardId}`)
       .reply(200, callRecordsResponse)
-      .get(`/call_records/voice_XXXXXXXXXXXXXXXXXXXXXXXX`)
+
+      .get(`/call_records/${recordId}`)
+      .reply(200, callRecordResponse)
+
+      .get(`/call_records?sim_card_id=${firstSIMCardId}&limit=${limit}`)
+      .reply(200, callRecordResponse)
+
+      .get(`/call_records?sim_card_id=${firstSIMCardId}&before=${beforeTimestamp}`)
+      .reply(200, callRecordsResponse)
+
+      .get(`/call_records?sim_card_id=${firstSIMCardId}&limit=${limit}&before=${beforeTimestamp}`)
+      .reply(200, callRecordResponse)
+
+      .get(`/call_records?sim_card_id=${firstSIMCardId}&after=${afterTimestamp}`)
+      .reply(200, callRecordsResponse)
+
+      .get(`/call_records?sim_card_id=${firstSIMCardId}&limit=${limit}&after=${afterTimestamp}`)
+      .reply(200, callRecordResponse)
+
+      .get(`/call_records?sim_card_id=${firstSIMCardId}&before=${beforeTimestamp}&after=${afterTimestamp}`)
+      .reply(200, callRecordsResponse)
+
+      .get(`/call_records?sim_card_id=${firstSIMCardId}&limit=${limit}&before=${beforeTimestamp}&after=${afterTimestamp}`)
       .reply(200, callRecordResponse)
   })
 
   it('should return the details of a call record', async () => {
-    let response = await zev.getCallRecord("voice_XXXXXXXXXXXXXXXXXXXXXXXX")
+    let response = await zev.getCallRecord(recordId)
 
     expect(response).to.deep.equal(callRecordResponse)
   })
@@ -237,65 +264,66 @@ describe('Call Records', () => {
     expect(response).to.deep.equal(callRecordsResponse)
   })
 
-  /* pagination */
-
   it('should return a list of call records for a SIM card with a limit', async () => {
-    let response = await zev.listCallRecords(firstSIMCardId)
+    let response = await zev.listCallRecords(firstSIMCardId, null, limit)
+
+    expect(response).to.deep.equal(callRecordResponse)
+  })
+
+  it('should return a list of call records for a SIM card before a timestamp', async () => {
+    let response = await zev.listCallRecords(firstSIMCardId, null, null, beforeTimestamp)
 
     expect(response).to.deep.equal(callRecordsResponse)
   })
 
-  // it('should return a list of call records for a SIM card before a timestamp', async () => {
-  //   let response = await zev.listCallRecords(firstSIMCardId)
+  it('should return a list of call records for a SIM card before a timestamp with limit', async () => {
+    let response = await zev.listCallRecords(firstSIMCardId, null, limit, beforeTimestamp)
 
-  //   expect(response).to.deep.equal(callRecordsResponse)
-  // })
+    expect(response).to.deep.equal(callRecordResponse)
+  })
 
-  // it('should return a list of call records for a SIM card before a timestamp with limit', async () => {
-  //   let response = await zev.listCallRecords(firstSIMCardId)
+  it('should return a list of call records for a SIM card after a timestamp', async () => {
+    let response = await zev.listCallRecords(firstSIMCardId, null, null, null, afterTimestamp)
 
-  //   expect(response).to.deep.equal(callRecordsResponse)
-  // })
+    expect(response).to.deep.equal(callRecordsResponse)
+  })
 
-  // it('should return a list of call records for a SIM card after a timestamp', async () => {
-  //   let response = await zev.listCallRecords(firstSIMCardId)
+  it('should return a list of call records for a SIM card after a timestamp with a limit', async () => {
+    let response = await zev.listCallRecords(firstSIMCardId, null, limit, null, afterTimestamp)
 
-  //   expect(response).to.deep.equal(callRecordsResponse)
-  // })
+    expect(response).to.deep.equal(callRecordResponse)
+  })
 
-  // it('should return a list of call records for a SIM card after a timestamp with limit', async () => {
-  //   let response = await zev.listCallRecords(firstSIMCardId)
+  it('should return a list of call records for a SIM card before a timestamp AND after a timestamp', async () => {
+    let response = await zev.listCallRecords(firstSIMCardId, null, null, beforeTimestamp, afterTimestamp)
 
-  //   expect(response).to.deep.equal(callRecordsResponse)
-  // })
+    expect(response).to.deep.equal(callRecordsResponse)
+  })
 
-  // it('should return a list of call records for a SIM card before a timestamp AND after a timestamp', async () => {
-  //   let response = await zev.listCallRecords(firstSIMCardId)
+  it('should return a list of call records for a SIM card before a timestamp AND after a timestamp with limit', async () => {
+    let response = await zev.listCallRecords(firstSIMCardId, null, limit, beforeTimestamp, afterTimestamp)
 
-  //   expect(response).to.deep.equal(callRecordsResponse)
-  // })
-
-  // it('should return a list of call records for a SIM card before a timestamp AND after a timestamp with limit', async () => {
-  //   let response = await zev.listCallRecords(firstSIMCardId)
-
-  //   expect(response).to.deep.equal(callRecordsResponse)
-  // })
+    expect(response).to.deep.equal(callRecordResponse)
+  })
 })
 
 describe('Webhooks', () => {
+  let webhookUrl: string = `https://www.example.com`
+  let webhookId: string = `wh_XXXXXXXXXXXXXXXXXXXXXXXX`
+
   beforeEach(() => {
     nock(url)
-      .post(`/webhooks?sim_card_id=${firstSIMCardId}&url=https%3A%2F%2Fwww.example.com`)
+      .post(`/webhooks?sim_card_id=${firstSIMCardId}&url=${webhookUrl}`)
       .reply(200, webhookResponse)
       .get(`/webhooks?sim_card_id=${firstSIMCardId}`)
       .reply(200, webhookListResponse)
-      .delete(`/webhooks/wh_XXXXXXXXXXXXXXXXXXXXXXXX`)
+      .delete(`/webhooks/${webhookId}`)
       .reply(200, deleteWebhookResponse)
       
   })
 
   it('should create a webhook', async () => {
-    let response = await zev.createWebhook("https://www.example.com", firstSIMCardId)
+    let response = await zev.createWebhook(webhookUrl, firstSIMCardId)
 
     expect(response).to.deep.equal(webhookResponse)
   })
@@ -307,7 +335,7 @@ describe('Webhooks', () => {
   })
 
   it('should delete a webhook', async () => {
-    let response = await zev.deleteWebhook("wh_XXXXXXXXXXXXXXXXXXXXXXXX")
+    let response = await zev.deleteWebhook(webhookId)
 
     expect(response).to.deep.equal(deleteWebhookResponse)
   })
