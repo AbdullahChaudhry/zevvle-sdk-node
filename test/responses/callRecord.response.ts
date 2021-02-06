@@ -1,7 +1,7 @@
 import { CallRecordModel } from '../../src/models'
 
 export const callRecordResponse: CallRecordModel = {
-  "id": "voice_XXXXXXXXXXXXXXXXXXXXXXXX",
+  "id": "voice_1XXXXXXXXXXXXXXXXXXXXXXX",
   "sim_card_id": "sim_XXXXXXXXXXXXXXXXXXXXXXXX",
   "setup_at": "2021-01-18T12:00:00.000Z",
   "started_at": "2021-01-18T12:00:08.000Z",
