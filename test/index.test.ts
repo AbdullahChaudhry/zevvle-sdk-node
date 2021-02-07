@@ -2,6 +2,11 @@ import { expect } from 'chai'
 import nock from 'nock'
 import { Zevvle } from '../src/index'
 
+let missingApiKeyError: string = 'Missing API key.'
+let missingNonGeoNumberError: string = 'Missing phoneNumber parameter'
+
+import { assert } from 'chai'
+
 import { 
   accountResponse, 
   pricingWithinResponse, 
@@ -340,3 +345,35 @@ describe('Webhooks', () => {
     expect(response).to.deep.equal(deleteWebhookResponse)
   })
 })
+
+
+describe('Zevvle', () => {
+  beforeEach(() => {})
+
+  it('should throw an error if API key is empty', async () => {
+    try {
+      // @ts-ignore
+      let zev = new Zevvle()
+    } catch (err) {
+      expect(err.message).to.equal(missingApiKeyError)
+      return
+    }
+
+    assert.fail(null, null, `expected an error to be thrown`)
+  })
+
+  it('should throw an error if non geographic number is empty', async () => {
+    try {
+      let zev = new Zevvle(apiKey)
+
+      // @ts-ignore
+      let nonGeoPricing = zev.getNonGeoPricing()
+    } catch (err) {
+      expect(err.message).to.equal(missingNonGeoNumberError)
+      return
+    }
+
+    assert.fail(null, null, 'expected an error to be thrown')
+  })
+})
+
