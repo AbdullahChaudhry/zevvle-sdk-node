@@ -11,7 +11,6 @@ import {
   NonGeoPricingModel, 
   ChargeModel, 
   RecordTypes, 
-  WebhookTypes, 
   WebhookResponseModel,
   ResponseModel
 } from './models'
