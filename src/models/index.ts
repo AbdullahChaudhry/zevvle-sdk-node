@@ -12,3 +12,5 @@ export * from './response.model'
 
 export * from './record.enum'
 export * from './webhook.enum'
+
+export * from './errorMessages'
