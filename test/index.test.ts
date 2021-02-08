@@ -4,6 +4,15 @@ import { Zevvle } from '../src/index'
 
 let missingApiKeyError: string = 'Missing API key.'
 let missingNonGeoNumberError: string = 'Missing phoneNumber parameter'
+let missingAccountIdError: string = 'Missing accountId parameter'
+let missingChargeIdError: string = 'Missing chargeId parameter'
+let missingUserIdError: string = 'Missing userId parameter'
+let missingSimIdError: string = 'Missing simId parameter'
+let missingCallRecordIdError: string = 'Missing callRecordId parameter'
+let missingUrlError: string = 'Missing url parameter'
+let missingWebhookIdError: string = 'Missing webhookId parameter'
+
+// Missing userId parameter
 
 import { assert } from 'chai'
 
@@ -346,7 +355,6 @@ describe('Webhooks', () => {
   })
 })
 
-
 describe('Zevvle', () => {
   beforeEach(() => {})
 
@@ -375,5 +383,116 @@ describe('Zevvle', () => {
 
     assert.fail(null, null, 'expected an error to be thrown')
   })
-})
 
+  it('should throw an error if account id is empty', async () => {
+    try {
+      let zev = new Zevvle(apiKey)
+
+      // @ts-ignore
+      let account = zev.getAccount()
+    } catch (err) {
+      expect(err.message).to.equal(missingAccountIdError)
+      return
+    }
+
+    assert.fail(null, null, 'expected an error to be thrown')
+  })
+
+  it('should throw an error if charge id is empty', async () => {
+    try {
+      let zev = new Zevvle(apiKey)
+
+      // @ts-ignore
+      let account = zev.getCharge()
+    } catch (err) {
+      expect(err.message).to.equal(missingChargeIdError)
+      return
+    }
+
+    assert.fail(null, null, 'expected an error to be thrown')
+  })
+
+  it('should throw an error if userId is empty', async () => {
+    try {
+      let zev = new Zevvle(apiKey)
+
+      // @ts-ignore
+      let account = zev.getUser()
+    } catch (err) {
+      expect(err.message).to.equal(missingUserIdError)
+      return
+    }
+
+    assert.fail(null, null, 'expected an error to be thrown')
+  })
+
+  it('should throw an error if simId is empty', async () => {
+    try {
+      let zev = new Zevvle(apiKey)
+
+      // @ts-ignore
+      let account = zev.getSim()
+    } catch (err) {
+      expect(err.message).to.equal(missingSimIdError)
+      return
+    }
+
+    assert.fail(null, null, 'expected an error to be thrown')
+  })
+  
+  it('should throw an error if callRecordId is empty', async () => {
+    try {
+      let zev = new Zevvle(apiKey)
+
+      // @ts-ignore
+      let account = zev.getCallRecord()
+    } catch (err) {
+      expect(err.message).to.equal(missingCallRecordIdError)
+      return
+    }
+
+    assert.fail(null, null, 'expected an error to be thrown')
+  })
+
+  it('should throw an error if simId is empty', async () => {
+    try {
+      let zev = new Zevvle(apiKey)
+
+      // @ts-ignore
+      let account = zev.listCallRecords()
+    } catch (err) {
+      expect(err.message).to.equal(missingSimIdError)
+      return
+    }
+
+    assert.fail(null, null, 'expected an error to be thrown')
+  })
+
+  it('should throw an error if url is empty', async () => {
+    try {
+      let zev = new Zevvle(apiKey)
+
+      // @ts-ignore
+      let account = zev.createWebhook()
+    } catch (err) {
+      expect(err.message).to.equal(missingUrlError)
+      return
+    }
+
+    assert.fail(null, null, 'expected an error to be thrown')
+  })
+  
+  it('should throw an error if webhook id is empty', async () => {
+    try {
+      let zev = new Zevvle(apiKey)
+
+      // @ts-ignore
+      let account = zev.deleteWebhook()
+    } catch (err) {
+      expect(err.message).to.equal(missingWebhookIdError)
+      return
+    }
+
+    assert.fail(null, null, 'expected an error to be thrown')
+  })
+})
