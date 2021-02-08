@@ -164,7 +164,7 @@ export class Zevvle {
    * @returns Zevvle SIM card details.
    */
   getSim(simId: string): Promise<SIMCardModel> {
-    throwErrorIfEmpty(simId, "Missing simID parameter")
+    throwErrorIfEmpty(simId, "Missing simId parameter")
 
     return this._doRequest(`/sim_cards/${simId}`)
   }
