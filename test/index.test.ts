@@ -1,20 +1,8 @@
-import { expect } from 'chai'
+import { expect, assert } from 'chai'
 import nock from 'nock'
+
 import { Zevvle } from '../src/index'
-
-let missingApiKeyError: string = 'Missing API key.'
-let missingNonGeoNumberError: string = 'Missing phoneNumber parameter'
-let missingAccountIdError: string = 'Missing accountId parameter'
-let missingChargeIdError: string = 'Missing chargeId parameter'
-let missingUserIdError: string = 'Missing userId parameter'
-let missingSimIdError: string = 'Missing simId parameter'
-let missingCallRecordIdError: string = 'Missing callRecordId parameter'
-let missingUrlError: string = 'Missing url parameter'
-let missingWebhookIdError: string = 'Missing webhookId parameter'
-
-// Missing userId parameter
-
-import { assert } from 'chai'
+import { ErrorMessages } from '../src/models/errorMessages'
 
 import { 
   accountResponse, 
@@ -33,6 +21,18 @@ import {
   webhookListResponse,
   deleteWebhookResponse
 } from './responses'
+
+const { 
+  apiKeyError,
+  nonGeoNumberError,
+  accountIdError,
+  chargeIdError,
+  userIdError,
+  simIdError,
+  callRecordIdError,
+  webhookUrlError,
+  webhookIdError
+ } = ErrorMessages
 
 const apiKey: string = "key_XXXXXXXXXXXXXXXXXXXXXXXX"
 const userId: string = 'user_XXXXXXXXXXXXXXXXXXXXXXXX'
@@ -363,7 +363,7 @@ describe('Zevvle', () => {
       // @ts-ignore
       let zev = new Zevvle()
     } catch (err) {
-      expect(err.message).to.equal(missingApiKeyError)
+      expect(err.message).to.equal(apiKeyError)
       return
     }
 
@@ -377,7 +377,7 @@ describe('Zevvle', () => {
       // @ts-ignore
       let nonGeoPricing = zev.getNonGeoPricing()
     } catch (err) {
-      expect(err.message).to.equal(missingNonGeoNumberError)
+      expect(err.message).to.equal(nonGeoNumberError)
       return
     }
 
@@ -391,7 +391,7 @@ describe('Zevvle', () => {
       // @ts-ignore
       let account = zev.getAccount()
     } catch (err) {
-      expect(err.message).to.equal(missingAccountIdError)
+      expect(err.message).to.equal(accountIdError)
       return
     }
 
@@ -405,7 +405,7 @@ describe('Zevvle', () => {
       // @ts-ignore
       let account = zev.getCharge()
     } catch (err) {
-      expect(err.message).to.equal(missingChargeIdError)
+      expect(err.message).to.equal(chargeIdError)
       return
     }
 
@@ -419,7 +419,7 @@ describe('Zevvle', () => {
       // @ts-ignore
       let account = zev.getUser()
     } catch (err) {
-      expect(err.message).to.equal(missingUserIdError)
+      expect(err.message).to.equal(userIdError)
       return
     }
 
@@ -433,7 +433,7 @@ describe('Zevvle', () => {
       // @ts-ignore
       let account = zev.getSim()
     } catch (err) {
-      expect(err.message).to.equal(missingSimIdError)
+      expect(err.message).to.equal(simIdError)
       return
     }
 
@@ -447,7 +447,7 @@ describe('Zevvle', () => {
       // @ts-ignore
       let account = zev.getCallRecord()
     } catch (err) {
-      expect(err.message).to.equal(missingCallRecordIdError)
+      expect(err.message).to.equal(callRecordIdError)
       return
     }
 
@@ -461,7 +461,7 @@ describe('Zevvle', () => {
       // @ts-ignore
       let account = zev.listCallRecords()
     } catch (err) {
-      expect(err.message).to.equal(missingSimIdError)
+      expect(err.message).to.equal(simIdError)
       return
     }
 
@@ -475,7 +475,7 @@ describe('Zevvle', () => {
       // @ts-ignore
       let account = zev.createWebhook()
     } catch (err) {
-      expect(err.message).to.equal(missingUrlError)
+      expect(err.message).to.equal(webhookUrlError)
       return
     }
 
@@ -489,7 +489,7 @@ describe('Zevvle', () => {
       // @ts-ignore
       let account = zev.deleteWebhook()
     } catch (err) {
-      expect(err.message).to.equal(missingWebhookIdError)
+      expect(err.message).to.equal(webhookIdError)
       return
     }
 
