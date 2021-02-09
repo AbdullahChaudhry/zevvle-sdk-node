@@ -42,6 +42,20 @@ const url: string = 'https://api.zevvle.com'
 
 const zev = new Zevvle(apiKey, url)
 
+describe('Constructor', () => {
+  it('should throw an error if API key is empty', async () => {
+    try {
+      // @ts-ignore
+      let zev = new Zevvle()
+    } catch (err) {
+      expect(err.message).to.equal(apiKeyError)
+      return
+    }
+
+    assert.fail(null, null, `expected an error to be thrown`)
+  })
+})
+
 describe('Log out', () => {
   beforeEach(() => {
     nock(url)
@@ -80,13 +94,37 @@ describe('Pricing', () => {
 
     expect(response).to.deep.equal(pricingResponse)
   })
+})
+
+describe('Non-Geographic Pricing', () => {
+  beforeEach(() => {
+    nock(url)
+      .get(`/non_geographic/118118`)
+      .reply(200, nonGeoPricingResponse)
+  })
 
   it('should return non-geographic pricing', async () => {
     let response = await zev.getNonGeoPricing("118118")
 
     expect(response).to.deep.equal(nonGeoPricingResponse)
   })
+
+  it('should throw an error if non-geographic number is empty', async () => {
+    try {
+      let zev = new Zevvle(apiKey)
+
+      // @ts-ignore
+      let nonGeoPricing = zev.getNonGeoPricing()
+    } catch (err) {
+      expect(err.message).to.equal(nonGeoNumberError)
+      return
+    }
+
+    assert.fail(null, null, 'expected an error to be thrown')
+  })
 })
+
+
 
 describe('Accounts', () => {
   beforeEach(() => {
@@ -99,6 +137,20 @@ describe('Accounts', () => {
     let response = await zev.getAccount(accountId)
 
     expect(response).to.deep.equal(accountResponse)
+  })
+
+  it('should throw an error if account id is empty', async () => {
+    try {
+      let zev = new Zevvle(apiKey)
+
+      // @ts-ignore
+      let account = zev.getAccount()
+    } catch (err) {
+      expect(err.message).to.equal(accountIdError)
+      return
+    }
+
+    assert.fail(null, null, 'expected an error to be thrown')
   })
 })
 
@@ -162,7 +214,7 @@ describe('Charges', () => {
     expect(response).to.deep.equal(chargesResponse)
   })
 
-  it('should return a list of charges before a timestamp with limit', async () => {
+  it('should return a list of charges before a timestamp with a limit', async () => {
     let limit = "1"
     let response = await zev.listCharges(limit, beforeTimestamp)
 
@@ -175,7 +227,7 @@ describe('Charges', () => {
     expect(response).to.deep.equal(chargesResponse)
   })
 
-  it('should return a list of charges after a timestamp with limit', async () => {
+  it('should return a list of charges after a timestamp with a limit', async () => {
     let response = await zev.listCharges(limit, null, afterTimestamp)
 
     expect(response).to.deep.equal(chargeResponse)
@@ -187,10 +239,24 @@ describe('Charges', () => {
     expect(response).to.deep.equal(chargesResponse)
   })
 
-  it('should return a list of charges before a timestamp AND after a timestamp with limit', async () => {
+  it('should return a list of charges before a timestamp AND after a timestamp with a limit', async () => {
     let response = await zev.listCharges(limit, beforeTimestamp, afterTimestamp)
 
     expect(response).to.deep.equal(chargeResponse)
+  })
+
+  it('should throw an error if charge id is empty', async () => {
+    try {
+      let zev = new Zevvle(apiKey)
+
+      // @ts-ignore
+      let account = zev.getCharge()
+    } catch (err) {
+      expect(err.message).to.equal(chargeIdError)
+      return
+    }
+
+    assert.fail(null, null, 'expected an error to be thrown')
   })
 })
 
@@ -206,6 +272,20 @@ describe('Users', () => {
 
     expect(response).to.deep.equal(userResponse)
   })
+
+  it('should throw an error if user id is empty', async () => {
+    try {
+      let zev = new Zevvle(apiKey)
+
+      // @ts-ignore
+      let account = zev.getUser()
+    } catch (err) {
+      expect(err.message).to.equal(userIdError)
+      return
+    }
+
+    assert.fail(null, null, 'expected an error to be thrown')
+  })
 })
 
 describe('SIM Cards', () => {
@@ -217,7 +297,7 @@ describe('SIM Cards', () => {
       .reply(200, simCardResponse)
   })
 
-  it('should return the details for a SIM card', async () => {
+  it('should return the details of a SIM card', async () => {
     let response = await zev.getSim(firstSIMCardId)
 
     expect(response).to.deep.equal(simCardResponse)
@@ -227,6 +307,20 @@ describe('SIM Cards', () => {
     let response = await zev.listSimCards()
 
     expect(response).to.deep.equal(listSimCardsResponse)
+  })
+
+  it('should throw an error if sim id is empty', async () => {
+    try {
+      let zev = new Zevvle(apiKey)
+
+      // @ts-ignore
+      let account = zev.getSim()
+    } catch (err) {
+      expect(err.message).to.equal(simIdError)
+      return
+    }
+
+    assert.fail(null, null, 'expected an error to be thrown')
   })
 })
 
@@ -290,7 +384,7 @@ describe('Call Records', () => {
     expect(response).to.deep.equal(callRecordsResponse)
   })
 
-  it('should return a list of call records for a SIM card before a timestamp with limit', async () => {
+  it('should return a list of call records for a SIM card before a timestamp with a limit', async () => {
     let response = await zev.listCallRecords(firstSIMCardId, null, limit, beforeTimestamp)
 
     expect(response).to.deep.equal(callRecordResponse)
@@ -314,10 +408,38 @@ describe('Call Records', () => {
     expect(response).to.deep.equal(callRecordsResponse)
   })
 
-  it('should return a list of call records for a SIM card before a timestamp AND after a timestamp with limit', async () => {
+  it('should return a list of call records for a SIM card before a timestamp AND after a timestamp with a limit', async () => {
     let response = await zev.listCallRecords(firstSIMCardId, null, limit, beforeTimestamp, afterTimestamp)
 
     expect(response).to.deep.equal(callRecordResponse)
+  })
+
+  it('should throw an error if call record id is empty', async () => {
+    try {
+      let zev = new Zevvle(apiKey)
+
+      // @ts-ignore
+      let account = zev.getCallRecord()
+    } catch (err) {
+      expect(err.message).to.equal(callRecordIdError)
+      return
+    }
+
+    assert.fail(null, null, 'expected an error to be thrown')
+  })
+
+  it('should throw an error if sim id is empty', async () => {
+    try {
+      let zev = new Zevvle(apiKey)
+
+      // @ts-ignore
+      let account = zev.listCallRecords()
+    } catch (err) {
+      expect(err.message).to.equal(simIdError)
+      return
+    }
+
+    assert.fail(null, null, 'expected an error to be thrown')
   })
 })
 
@@ -353,135 +475,7 @@ describe('Webhooks', () => {
 
     expect(response).to.deep.equal(deleteWebhookResponse)
   })
-})
 
-describe('Zevvle', () => {
-  beforeEach(() => {})
-
-  it('should throw an error if API key is empty', async () => {
-    try {
-      // @ts-ignore
-      let zev = new Zevvle()
-    } catch (err) {
-      expect(err.message).to.equal(apiKeyError)
-      return
-    }
-
-    assert.fail(null, null, `expected an error to be thrown`)
-  })
-
-  it('should throw an error if non geographic number is empty', async () => {
-    try {
-      let zev = new Zevvle(apiKey)
-
-      // @ts-ignore
-      let nonGeoPricing = zev.getNonGeoPricing()
-    } catch (err) {
-      expect(err.message).to.equal(nonGeoNumberError)
-      return
-    }
-
-    assert.fail(null, null, 'expected an error to be thrown')
-  })
-
-  it('should throw an error if account id is empty', async () => {
-    try {
-      let zev = new Zevvle(apiKey)
-
-      // @ts-ignore
-      let account = zev.getAccount()
-    } catch (err) {
-      expect(err.message).to.equal(accountIdError)
-      return
-    }
-
-    assert.fail(null, null, 'expected an error to be thrown')
-  })
-
-  it('should throw an error if charge id is empty', async () => {
-    try {
-      let zev = new Zevvle(apiKey)
-
-      // @ts-ignore
-      let account = zev.getCharge()
-    } catch (err) {
-      expect(err.message).to.equal(chargeIdError)
-      return
-    }
-
-    assert.fail(null, null, 'expected an error to be thrown')
-  })
-
-  it('should throw an error if userId is empty', async () => {
-    try {
-      let zev = new Zevvle(apiKey)
-
-      // @ts-ignore
-      let account = zev.getUser()
-    } catch (err) {
-      expect(err.message).to.equal(userIdError)
-      return
-    }
-
-    assert.fail(null, null, 'expected an error to be thrown')
-  })
-
-  it('should throw an error if simId is empty', async () => {
-    try {
-      let zev = new Zevvle(apiKey)
-
-      // @ts-ignore
-      let account = zev.getSim()
-    } catch (err) {
-      expect(err.message).to.equal(simIdError)
-      return
-    }
-
-    assert.fail(null, null, 'expected an error to be thrown')
-  })
-  
-  it('should throw an error if callRecordId is empty', async () => {
-    try {
-      let zev = new Zevvle(apiKey)
-
-      // @ts-ignore
-      let account = zev.getCallRecord()
-    } catch (err) {
-      expect(err.message).to.equal(callRecordIdError)
-      return
-    }
-
-    assert.fail(null, null, 'expected an error to be thrown')
-  })
-
-  it('should throw an error if simId is empty', async () => {
-    try {
-      let zev = new Zevvle(apiKey)
-
-      // @ts-ignore
-      let account = zev.listCallRecords()
-    } catch (err) {
-      expect(err.message).to.equal(simIdError)
-      return
-    }
-
-    assert.fail(null, null, 'expected an error to be thrown')
-  })
-
-  it('should throw an error if url is empty', async () => {
-    try {
-      let zev = new Zevvle(apiKey)
-
-      // @ts-ignore
-      let account = zev.createWebhook()
-    } catch (err) {
-      expect(err.message).to.equal(webhookUrlError)
-      return
-    }
-
-    assert.fail(null, null, 'expected an error to be thrown')
-  })
-  
   it('should throw an error if webhook id is empty', async () => {
     try {
       let zev = new Zevvle(apiKey)
@@ -490,6 +484,20 @@ describe('Zevvle', () => {
       let account = zev.deleteWebhook()
     } catch (err) {
       expect(err.message).to.equal(webhookIdError)
+      return
+    }
+
+    assert.fail(null, null, 'expected an error to be thrown')
+  })
+
+  it('should throw an error if webhook url is empty', async () => {
+    try {
+      let zev = new Zevvle(apiKey)
+
+      // @ts-ignore
+      let account = zev.createWebhook()
+    } catch (err) {
+      expect(err.message).to.equal(webhookUrlError)
       return
     }
 
