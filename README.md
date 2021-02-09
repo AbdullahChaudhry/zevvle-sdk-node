@@ -165,17 +165,17 @@ ___
 
 ### listCharges
 
-▸ **listCharges**(`limit?`: *string*, `before?`: *null* \| *string*, `after?`: *null* \| *string*): *Promise*<ChargeModel[]\>
+▸ **listCharges**(`limit?`: *string*, `before?`: *string*, `after?`: *string*): *Promise*<ChargeModel[]\>
 
 List all charges linked to the Zevvle API key.
 
 #### Parameters:
 
-Name | Type | Default value | Description |
------- | ------ | ------ | ------ |
-`limit` | *string* | 10 | (optional) Limit the number of records; default 10, maximum 100.   |
-`before` | *null* \| *string* | null | (optional) Get records before an RFC 3339-encoded timestamp or record id.   |
-`after` | *null* \| *string* | null | (optional) Get records after an RFC 3339-encoded timestamp or record id.   |
+Name | Type | Description |
+------ | ------ | ------ |
+`limit?` | *string* | (optional) Limit the number of records; default 10, maximum 100.   |
+`before?` | *string* | (optional) Get records before an RFC 3339-encoded timestamp or record id.   |
+`after?` | *string* | (optional) Get records after an RFC 3339-encoded timestamp or record id.   |
 
 **Returns:** A list of charges for your account.
 
@@ -225,7 +225,7 @@ ___
 
 ### getCallRecord
 
-▸ **getCallRecord**(`callRecordId`: *string*): *Promise*<CallRecordModel\>
+▸ **getCallRecord**(`recordId`: *string*): *Promise*<CallRecordModel\>
 
 Looks up Zevvle call record.
 
@@ -233,7 +233,7 @@ Looks up Zevvle call record.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`callRecordId` | *string* | ID of the Zevvle record to look up.   |
+`recordId` | *string* | ID of the Zevvle record to look up.   |
 
 **Returns:** Zevvle call record details.
 
@@ -241,19 +241,19 @@ ___
 
 ### listCallRecords
 
-▸ **listCallRecords**(`simId`: *string*, `type?`: DATA \| VOICE \| SMS \| MMS, `limit?`: *string*, `before?`: *null* \| *string*, `after?`: *null* \| *string*): *Promise*<CallRecordModel[]\>
+▸ **listCallRecords**(`simId`: *string*, `type?`: *string*, `limit?`: *string*, `before?`: *string*, `after?`: *string*): *Promise*<CallRecordModel[]\>
 
 List call records for a given Zevvle SIM ID, according to filtering.
 
 #### Parameters:
 
-Name | Type | Default value | Description |
------- | ------ | ------ | ------ |
-`simId` | *string* | - | ID of the Zevvle SIM card to get records for.
-`type?` | DATA \| VOICE \| SMS \| MMS | - | (optional) Call record type (data, voice, sms, mms) to filter on.   |
-`limit` | *string* | 10 | (optional) Limit the number of records; default 10, maximum 100.   |
-`before` | *null* \| *string* | null | (optional) Get records before an RFC 3339-encoded timestamp or record id.   |
-`after` | *null* \| *string* | null | (optional) Get records after an RFC 3339-encoded timestamp or record id.   |
+Name | Type | Description |
+------ | ------ | ------ |
+`simId` | *string* | - |
+`type?` | *string* | (optional) Call record type (data, voice, sms, mms) to filter on.   |
+`limit?` | *string* | (optional) Limit the number of records; default 10, maximum 100.   |
+`before?` | *string* | (optional) Get records before an RFC 3339-encoded timestamp or record id.   |
+`after?` | *string* | (optional) Get records after an RFC 3339-encoded timestamp or record id.   |
 
 **Returns:** Call records for the given query.
 
@@ -261,35 +261,19 @@ ___
 
 ### createWebhook
 
-▸ **createWebhook**(`url`: *string*, `simCardId?`: *string*, `type?`: *null* \| DATA\_CREATED \| VOICE\_CREATED \| SMS\_CREATED \| MMS\_CREATED \| CHARGE\_CREATED): *Promise*<WebhookResponseModel\>
+▸ **createWebhook**(`url`: *string*, `simCardId?`: *string*, `type?`: *string*): *Promise*<WebhookResponseModel\>
 
 Create a webhook.
 
 #### Parameters:
 
-Name | Type | Default value | Description |
------- | ------ | ------ | ------ |
-`url` | *string* | - | The URL to send notifications to. Must be HTTPS.   |
-`simCardId?` | *string* | - | (optional) ID of SIM card to receive notifications for. If empty will default to all SIM cards.   |
-`type` | *null* \| DATA\_CREATED \| VOICE\_CREATED \| SMS\_CREATED \| MMS\_CREATED \| CHARGE\_CREATED | null | (optional) The matching event type (data.created, voice.created, sms.created, mms.created, charge.created, null)   |
-
-**Returns:** Webhook response.
-
-___
-
-### listWebhooks
-
-▸ **listWebhooks**(`simCardId?`: *string*): *Promise*<WebhookResponseModel[]\>
-
-List webhooks.
-
-#### Parameters:
-
 Name | Type | Description |
 ------ | ------ | ------ |
-`simCardId?` | *string* | (optional) SIM card to retrieve the webhooks for. Defaults to all your webhooks   |
+`url` | *string* | The URL to send notifications to. Must be HTTPS.   |
+`simCardId?` | *string* | (optional) ID of SIM card to receive notifications for. If empty will default to all SIM cards.   |
+`type?` | *string* | (optional) The matching event type (data.created, voice.created, sms.created, mms.created, charge.created, null)   |
 
-**Returns:** A list of webhooks.
+**Returns:** A webhook response.
 
 ___
 
@@ -303,9 +287,28 @@ Delete a webhook
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`webhookId` | *string* | Webhook ID   |
+`webhookId` | *string* | Webhook ID.   |
 
 **Returns:** Response message.
+
+___
+
+### listWebhooks
+
+▸ **listWebhooks**(`simCardId?`: *string*): *Promise*<WebhookResponseModel[]\>
+
+List webhooks.
+
+#### Parameters:
+
+Name | Type | Description |
+------ | ------ | ------ |
+`simCardId?` | *string* | (optional) SIM card to retrieve the webhooks for. Defaults to all your webhooks.   |
+
+**Returns:** *Promise*<WebhookResponseModel[]\>
+
+A list of webhooks.
+
 
 ## Contributions
 
