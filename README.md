@@ -305,9 +305,7 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `simCardId?` | *string* | (optional) SIM card to retrieve the webhooks for. Defaults to all your webhooks.   |
 
-**Returns:** *Promise*<WebhookResponseModel[]\>
-
-A list of webhooks.
+**Returns:** A list of webhooks.
 
 
 ## Contributions
