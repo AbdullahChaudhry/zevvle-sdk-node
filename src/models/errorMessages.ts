@@ -5,7 +5,7 @@ export const ErrorMessages = {
   chargeIdError: 'Missing charge id.',
   userIdError: 'Missing user id.',
   simIdError: 'Missing sim id',
-  callRecordIdError: 'Missing call record id.',
+  recordIdError: 'Missing record id.',
   urlError: 'Missing url.',
   webhookIdError: 'Missing webhook id.',
   webhookUrlError: 'Missing webhook url.'

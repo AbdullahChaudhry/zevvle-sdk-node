@@ -29,7 +29,7 @@ const {
   chargeIdError,
   userIdError,
   simIdError,
-  callRecordIdError,
+  recordIdError,
   webhookUrlError,
   webhookIdError
  } = ErrorMessages
@@ -421,7 +421,7 @@ describe('Call Records', () => {
       // @ts-ignore
       let account = zev.getCallRecord()
     } catch (err) {
-      expect(err.message).to.equal(callRecordIdError)
+      expect(err.message).to.equal(recordIdError)
       return
     }
 

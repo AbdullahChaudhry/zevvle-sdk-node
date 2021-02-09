@@ -24,7 +24,7 @@ const {
   chargeIdError,
   userIdError,
   simIdError,
-  callRecordIdError,
+  recordIdError,
   urlError,
   webhookUrlError,
   webhookIdError
@@ -194,13 +194,13 @@ export class Zevvle {
 
   /**
    * Looks up Zevvle call record.
-   * @param callRecordId ID of the Zevvle record to look up.
+   * @param recordId ID of the Zevvle record to look up.
    * @returns Zevvle call record details.
    */
-  getCallRecord(callRecordId: string): Promise<CallRecordModel> {
-    throwErrorIfEmpty(callRecordId, callRecordIdError)
+  getCallRecord(recordId: string): Promise<CallRecordModel> {
+    throwErrorIfEmpty(recordId, recordIdError)
 
-    return this._doRequest(`/call_records/${callRecordId}`)
+    return this._doRequest(`/call_records/${recordId}`)
   }
 
   /**
