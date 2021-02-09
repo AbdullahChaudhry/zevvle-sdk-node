@@ -249,7 +249,7 @@ List call records for a given Zevvle SIM ID, according to filtering.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`simId` | *string* | - |
+`simId` | *string* | ID of the Zevvle SIM card to look up.   |
 `type?` | *string* | (optional) Call record type (data, voice, sms, mms) to filter on.   |
 `limit?` | *string* | (optional) Limit the number of records; default 10, maximum 100.   |
 `before?` | *string* | (optional) Get records before an RFC 3339-encoded timestamp or record id.   |
